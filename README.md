@@ -11,7 +11,20 @@ room111, UdK, medienhaus, kleistpark
 dates
 -----
 
-starting ***27okt***, 14-16 in room111
+- [ ] [27oct 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161027): introduction and overview
+- [ ] 03nov 14-16 ?
+- [ ] 10nov 14-16
+- [ ] 17nov 14-16
+- [ ] 24nov 14-16
+- [ ] 01dec 14-16
+- [ ] 08dec 14-16
+- [ ] 15dec 14-16 ?
+- [ ] 05jan 14-16
+- [ ] 12jan 14-16
+- [ ] 19jan 14-16
+- [ ] 26jan 14-16
+- [ ] 02feb 14-16
+- [ ] 09feb 14-16
 
 links to previous semesters... <http://redfrik.github.io/udk00-Audiovisual_Programming/>
 
