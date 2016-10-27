@@ -4,6 +4,27 @@ introduction and overview
 * links to previous semesters... <http://redfrik.github.io/udk00-Audiovisual_Programming/>
 * and dates + times for this course... <https://github.com/redFrik/udk16-Immersive_Technologies> <-save this page
 
+discussion
+--
+
+Immersive audiovisual works?
+
+big screen, loud sound, huge room
+
+vs
+
+glasses, headphones, private space
+
+examples
+--
+
+Ryoji Ikeda: The Transfinite <https://www.youtube.com/watch?v=omDK2Cm2mwo>
+
+Ulf Langheinrich: Hemisphere <http://www.epidemic.net/en/videos/langheinrich/index.html>
+
+flight simulators: <https://www.youtube.com/watch?v=w5Psonmh0GQ>
+
+
 course software
 --
 
@@ -22,7 +43,8 @@ supercollider
 s.boot;
 
 a= {DelayN.ar(SoundIn.ar, 0.283, 0.283).dup}.play;  //start delayed microphone sound
-
+//now talk freely into the mic and play with the headphone volume
+//at some point you should feel your speech become slower and slower
 a.release;  //stop sound
 
 //playing many delays at the same time
@@ -66,13 +88,14 @@ unity3d
 
 * installing
 * getting around
+* access documentation
 * creating a simple particle system
+* exporting to standalone application / webpage
 
 unity3d introduction videos: <https://unity3d.com/learn/tutorials/topics/interface-essentials>
 
-examples
---
-
-Ryoji Ikeda: The Transfinite <https://www.youtube.com/watch?v=omDK2Cm2mwo>
-
-Ulf Langheinrich: Hemisphere <http://www.epidemic.net/en/videos/langheinrich/index.html>
+* scene vs game view
+* camera
+* coordinate system
+* position, rotation, scale
+* hierarchy
