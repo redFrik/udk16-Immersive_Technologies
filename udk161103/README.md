@@ -100,7 +100,7 @@ and there was time...
 * doubleclick the script under Assets and MonoDevelop-Unity should open
 * copy&paste in the code below replacing what was there
 
-´´´javascript
+```javascript
 #pragma strict
 
 function Start () {
@@ -110,7 +110,7 @@ function Start () {
 function Update () {
     transform.Rotate(0.4, 0, 0);
 }
-´´´
+```
 
 * go back to unity and press play
 * the sun should move around in the sky
