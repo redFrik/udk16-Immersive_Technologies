@@ -12,7 +12,7 @@ dates
 -----
 
 - [x] [27oct 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161027): introduction and overview
-- [ ] [03nov 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk16103): 
+- [ ] [03nov 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161103): basic supercollider, basic unity
 - [ ] 10nov 14-16
 - [ ] 17nov 14-16
 - [ ] 24nov 14-16
