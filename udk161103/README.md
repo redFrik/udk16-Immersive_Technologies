@@ -51,11 +51,15 @@ unity
 
 ![box](01box.png?raw=true "box")
 
+building a staircase...
+
 * duplicate the cube a few times (cmd+d or ctrl click and select duplicate)
 * build a staircase (click&drag cubes around with red, green, blue arrows)
 * optionally hold down cmd to snap to grid (set snapsize under Edit / Snap Settings...)
 
 ![stair](02stair.png?raw=true "stair")
+
+adding a character...
 
 * select Assets / Import Package / Characters
 * just click 'import' in the window that pops up to import everything
@@ -65,10 +69,14 @@ unity
 
 ![fps](03fps.png?raw=true "fps")
 
+trying it out...
+
 * press the play button (mouse = look around, space = jump, ADWS or arrow keys to move)
 * try to climb the stairs (use jump)
 * jump of the staris, look up and see your world disappear
 * press 'esc' and the play button again to stop
+
+adding sound...
 
 * find four short soundfiles you recorded with supercollider above
 * drag&drop them onto the Assets tab
@@ -80,6 +88,8 @@ unity
 
 ![snd](04snd.png?raw=true "snd")
 
+and there was time...
+
 * select Directional Light in the Hierarchy (left)
 * click the Add Component button in the inspector (right)
 * find 'New Script' and make sure language is set to 'Java Script'
@@ -90,7 +100,7 @@ unity
 * doubleclick the script under Assets and MonoDevelop-Unity should open
 * copy&paste in the code below replacing what was there
 
-´´´js
+´´´javascript
 #pragma strict
 
 function Start () {
