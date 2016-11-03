@@ -31,11 +31,15 @@ a.release;
 a= {TGrains.ar(2, Impulse.ar(MouseY.kr(1, 100, 1)), b.bufnum, LFNoise1.kr(1).range(0.8, 1.2), MouseX.kr(0, 8), 0.3)}.play;
 a.release;
 
+//more randomness (no mouse interaction here)
+a= {TGrains.ar(2, Impulse.kr(LFNoise2.kr(1).range(1, 10)), b.bufnum, LFNoise2.kr(1).range(1, 10), LFNoise2.kr(1).range(1, 8), LFNoise2.kr(1).range(0.1, 1.5))}.play;
+a.release;
+
 //etc.
 
 //--soundfiles
-s.recSampleFormat= "int32";  //only needed to run once
-//now create a few different (+4) short soundfiles by recording the output of the above
+s.recSampleFormat= "int32";  //only needed to run once - unity need non-float format
+//now create a few different (4) short soundfiles by recording the output of the above
 s.record;
 s.stopRecording;
 
