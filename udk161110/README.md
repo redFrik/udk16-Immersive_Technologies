@@ -8,7 +8,7 @@ supercollider
 s.boot
 
 //--loading a soundfile
-//drag and drop a file onto this document to see the path
+//drag and drop a file onto this document to see the path (not mp3)
 //then copy and paste that into the line below
 b.free; b= Buffer.readChannel(s, "/Users/asdf/Desktop/sounds/a11wlk01-44_1.aiff", channels:[0]);  //here edit path to your soundfile
 
@@ -44,11 +44,12 @@ using the webcamera as a texture...
 * set the transform scale to  x 5, y 1, z 5 in the plane inspector
 * optionally set the transform y rotation to 180 in the plane inspector
 * select add component at the bottom of the plane inspector
-* select new script and call it something (here 'webcam')
+* select new script, make sure language is set to javascript and call it something (here 'webcam')
+* your scene should now look like this...
 
 ![webcam](01webcam.png?raw=true "webcam")
 
-* doubleclick the script to open it in mono develop
+* doubleclick the script under assets to open it in mono develop
 * add the following code...
 
 ```javascript
@@ -66,7 +67,7 @@ adding more objects to the scene...
 
 * save and go back to unity
 * click 'play' and you should see video from your webcamera mapped onto the plane
-* add some more objects (here 'sphere')
+* add some more 3d game objects (here 'sphere')
 * drag and drop the webcam script onto the objects in the hierarchy list
 * dont forget to position, rotate and scale the objects
 
@@ -77,9 +78,9 @@ changing the main camera...
 * select main camera in the hierarchy list
 * click 'play' to go into run mode
 * play around with position, rotation and scale in the camera inspector
-* picture below show some settings i found fun
+* the picture here below show settings i found fun
 * also play around with the projection setting - try with 'orthographic'
-* when you're happy remember the settings, click 'stop' and write them into your scene settings
+* when you're happy remember the settings, click 'stop' and then make them permanent by write them into your scene settings
 
 ![camera](03camera.png?raw=true "camera")
 
@@ -96,7 +97,7 @@ adding a character...
 
 connecting the main camera to the character...
 
-* in the hierarchy list, drag and drop the main onto the thirdpersoncontroller
+* in the hierarchy list, drag and drop the 'Main Camera' onto the thirdpersoncontroller
 * position the camera with the inspector to sit slightly behind and above the character
 
 ![tpccamera](05tpccamera.png?raw=true "tpccamera")
@@ -108,7 +109,8 @@ connecting the main camera to the character...
 
 ![tpcsettings](06tpcsettings.png?raw=true "tpcsettings")
 
-* etc etc. explore
+etc etc. explore.
+you can also try the 'RollerBall' character and attach the main camera to that. then roll around on top of your webcamera texture.
 
 resources
 --
