@@ -95,11 +95,11 @@ here is last week's example again but using this technique for triggering the so
 ```
 b.free; b= Buffer.readChannel(s, "/Users/asdf/Desktop/sounds/a11wlk01-44_1.aiff", channels:[0]);  //here edit path to your soundfile
 
-a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(1, Impulse.ar(arr), b.bufnum, 1, arr*b.duration*0.75, 0.3))}.play;
+a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(1, Impulse.ar(arr), b.bufnum, 1, arr*b.duration*0.75, 0.5))}.play;
 a.release;
 
 //we can also use the array for playback rate
-a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(1, Impulse.ar(arr), b.bufnum, arr+0.5, arr*b.duration*0.75, 0.3))}.play;
+a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(1, Impulse.ar(arr), b.bufnum, arr+0.5, arr*b.duration*0.75, 0.5))}.play;
 a.release;
 ```
 
@@ -118,13 +118,15 @@ now watch this... <https://vimeo.com/16977985> to see a visualization of what's 
 unity
 --
 
-* turn off gravity in project settings
+* start unity and create a new project
+* turn off Y gravity under Edit / Project Settings / Physics (the default is -9.81 which roughly correspond to our earth's gravity)
 
 ![zerogravity](02zerogravity.png?raw=true "zerogravity")
 
-* create new empty game object
-* add a tag "Cube"
-* add the following script
+* select GameObject / Create Empty
+* go to the inspector and add tag "Cube" (click the + and make sure you type Cube with a capital C)
+* select add component, new javascript. call it anything
+* open the script and add the following code... (replace what is there by default)
 
 ```javascript
 var stepX= 1.2;
