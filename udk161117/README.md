@@ -80,7 +80,7 @@ a.release;
 
 again try to add your own arrays.
 
-note the different rhythms your get. numbers like 1, 0.5, 0.3333333, 0.25 will make the click sounds come back in sync at regular intervals. so 1/2, 1/3, 1/4 etc are all giving interesting result, while combinations of more random numbers like 0.41, 1.18 etc will repeat perhaps only every 10 year.
+note the different rhythms your get. numbers like 1, 0.5, 0.3333333, 0.25 will make the click sounds come back in sync at regular intervals. so 1/2, 1/3, 1/4 etc are all giving interesting result, while combinations of more random numbers like 0.41, 1.18 etc will repeat perhaps only once every 10 years.
 
 ```
 a= {var arr= (1/8, (1/8)+(1/16) .. 1.0); Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
@@ -96,11 +96,11 @@ here is last week's example again but using this technique for triggering the so
 ```
 b.free; b= Buffer.readChannel(s, "/Users/asdf/Desktop/sounds/a11wlk01-44_1.aiff", channels:[0]);  //here edit path to your soundfile
 
-a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(1, Impulse.ar(arr), b.bufnum, 1, arr*b.duration*0.75, 0.5))}.play;
+a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(2, Impulse.ar(arr), b.bufnum, 1, arr*b.duration*0.75, 0.5))}.play;
 a.release;
 
 //we can also use the array for playback rate
-a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(1, Impulse.ar(arr), b.bufnum, arr+0.5, arr*b.duration*0.75, 0.5))}.play;
+a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(2, Impulse.ar(arr), b.bufnum, arr+0.5, arr*b.duration*0.75, 0.5))}.play;
 a.release;
 ```
 
@@ -122,7 +122,7 @@ a= {var arr= (0.1, 0.15 .. 4)/8; Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2
 a.release;
 
 //use a scale to pitch buffer sample playback
-a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(1, Impulse.ar(arr), b.bufnum, Scale.minorPentatonic.degrees.midiratio, 0, 0.5))}.play;
+a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(2, Impulse.ar(arr), b.bufnum, Scale.minorPentatonic.degrees.midiratio, 0, 0.5))}.play;
 a.release;
 ```
 
@@ -171,11 +171,11 @@ function Update() {
 //PrimitiveType.Cylinder
 ```
 
-play around with the camera and also try changing things in the code. with 100 objects of type `Sphere` and with some fiddling around with the varables, you can get something like this snake...
+play around with the camera and also try changing things in the code. with 100 objects of type `Sphere` and with some fiddling around with the variables, you can get something like this...
 
 ![snake](03snake.png?raw=true "snake")
 
-we can also add an amplitude variable. and another importaint feature to add is that the speed of each object should be tied to the index. so the first object (when `i= 0` in the for loop) should move slow, the next object a little bit faster and so on. it's easy to do with a `*(i+1)*timeFactor` - see the code below.
+we can also add an amplitude variable. and another importaint feature to add (for it to become a *whitney* thing) is that the speed of each object should be tied to the index. so the first object (when `i= 0` in the for loop) should move slow, the next object a little bit faster and so on. it's easy to do with a `*(i+1)*timeFactor` - see the code below.
 
 * copy&paste the code below into your javascript in MonoDevelop, replacing what was there
 * save and go back to unity
@@ -205,7 +205,7 @@ function Update() {
 }
 ```
 
-now we add a cosine for the x axis to get a spiral. and we also clean up the code a little bit by adding more variables (x, y, theta)...
+now we add a cosine for the x axis to get a spiral. and we also clean up the code a little bit by adding more variables (iamp, x, y, theta)...
 
 ```javascript
 var speed= 0.005;
@@ -270,7 +270,7 @@ function Update() {
 you can also add a texture by...
 
 * drag&drop a picture file into assets
-* create a folder (left or control click) and name it Resources
+* create a folder (left or control click in the assets window) and name it `Resources`
 * move your picture file into the resources folder (see screenshot below)
 * then take this code and edit the filename to match your file...
 
