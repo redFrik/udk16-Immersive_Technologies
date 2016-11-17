@@ -90,6 +90,13 @@ a.release;
 a= {var arr= (0.125, 0.1876 .. 1.0); Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
 a.release;
 ```
+
+some more examples...
+```
+a= {var arr= (0.1, 0.15 .. 4)/8; Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
+a.release;
+```
+
 here is last week's example again but using this technique for triggering the sound grains.
 
 ```
