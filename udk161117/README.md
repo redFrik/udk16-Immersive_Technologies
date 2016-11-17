@@ -25,8 +25,10 @@ the above code should give you something like this...
 
 ![meters](01meters.png?raw=true "meters")
 
-but as we normally only have stereo sound output (2 channels - left and right) from our laptops, we can only hear the first two clicks.
-so mix all the clicking sounds down to stereo (panning the 10 sounds left to right) we can wrap the `Impulse` in a `Splay` like this...
+study the pattern.
+
+as we normally only have stereo sound output (2 channels - left and right) from our laptops, we can only hear the first two clicks.
+in supercollider we can mix all the clicking sounds down to stereo (here panning the 10 sounds left to right) by wrapping the `Impulse` in a `Splay` like this...
 
 ```
 a= {Splay.ar(Impulse.ar([1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9]))}.play;
@@ -35,7 +37,7 @@ a.release;
 
 now you should hear all ten clicks. note how they go in and out of sync.
 
-in supercollider you can often write code in a much more compact form. so we can get exactly the same result by writing it like this...
+in programming you often want to write code in a more compact form. so we can get exactly the same result by writing like this...
 
 ```
 a= {Splay.ar(Impulse.ar((1.0, 1.1 .. 1.9)))}.play;
@@ -43,6 +45,8 @@ a.release;
 
 (1.0, 1.1 .. 1.9);  //will post the array above
 ```
+
+the code `(start, next .. last);` creates an array for us so that we don't manually need to type in all the numbers.
 
 the first value (1.0) is the start value, the second (1.1) will decide the step amount, and the third is the ending value.
 play around with the numbers and try to build some different arrays.
@@ -58,6 +62,7 @@ here are some more examples...
 
 (0.1, 0.361 .. 2.8);
 ```
+note that there's a drawback with this because it's not so easy to spontaneously adjust one of the values in the middle. but on the other hand it's easy to quickly create large arrays when you don't have to write it all out manually.
 
 now try putting in some of your own arrays into the sound synthesis code. for example...
 
@@ -69,7 +74,7 @@ a.release;
 to better differentiate between the click sounds we can instead make them triggers short pitched 'ping' sounds.
 
 ```
-a= {var arr= (1.0, 1.1 ..1.9); Splay.ar(Ringz.ar(Impulse.ar(arr),400*(arr*2),0.2))}.play;
+a= {var arr= (1.0, 1.1 ..1.9); Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
 a.release;
 ```
 
@@ -78,11 +83,11 @@ again try to add your own arrays.
 note the different rhythms your get. numbers like 1, 0.5, 0.3333333, 0.25 will make the click sounds come back in sync at regular intervals. so 1/2, 1/3, 1/4 etc are all giving interesting result, while combinations of more random numbers like 0.41, 1.18 etc will repeat perhaps only every 10 year.
 
 ```
-a= {var arr= (1/8, (1/8)+(1/16) .. 1.0); Splay.ar(Ringz.ar(Impulse.ar(arr),400*(arr*2),0.2))}.play;
+a= {var arr= (1/8, (1/8)+(1/16) .. 1.0); Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
 a.release;
 
 //which is exactly the same as...
-a= {var arr= (0.125, 0.1876 .. 1.0); Splay.ar(Ringz.ar(Impulse.ar(arr),400*(arr*2),0.2))}.play;
+a= {var arr= (0.125, 0.1876 .. 1.0); Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
 a.release;
 ```
 here is last week's example again but using this technique for triggering the sound grains.
@@ -101,19 +106,55 @@ a.release;
 two more examples using this technique but with frequencies mapped to scales...
 
 ```
-a= {var arr= (1, 2 .. 16); Splay.ar(Ringz.ar(Impulse.ar(arr/16).lag(0.005),(64+Scale.major.degrees).midicps,0.8))*0.5}.play;
+a= {var arr= (1, 2 .. 16); Splay.ar(Ringz.ar(Impulse.ar(arr/16).lag(0.005), (64+Scale.major.degrees).midicps, 0.8))*0.5}.play;
 a.release;
 
-a= {var num= 32, speed= 0.4, arr= (1, 2 .. num); Limiter.ar(Splay.ar(SinOsc.ar((60+Scale.minorPentatonic.degrees).midicps,0,EnvGen.ar(Env.perc(0.01, 0.5), Impulse.ar(arr/num*speed)))))}.play;
+a= {var num= 32, speed= 0.4, arr= (1, 2 .. num); Limiter.ar(Splay.ar(SinOsc.ar((60+Scale.minorPentatonic.degrees).midicps, 0, EnvGen.ar(Env.perc(0.01, 0.5), Impulse.ar(arr/num*speed)))))}.play;
 a.release;
 ```
 
-now watch this... <https://vimeo.com/16977985>
+now watch this... <https://vimeo.com/16977985> to see a visualization of what's going on.
 
 unity
 --
 
+* turn off gravity in project settings
 
+![zerogravity](02zerogravity.png?raw=true "zerogravity")
+
+* create new empty game object
+* add a tag "Cube"
+* add the following script
+
+```javascript
+var stepX= 1.2;
+var speed= 0.05;
+var offset= 0.2;
+
+function Start() {
+    var num= 10;	//how many objects
+    for (var i= 0; i<num; i++) {
+        var cube= GameObject.CreatePrimitive(PrimitiveType.Cube);	//here try different primitives
+        cube.tag= "Cube";
+        cube.AddComponent.<Rigidbody>();
+    }
+}
+function Update() {
+    var cubes : GameObject[];
+    cubes= GameObject.FindGameObjectsWithTag("Cube");
+    for(var i= 0; i<cubes.length; i++) {
+        cubes[i].transform.position= Vector3(i*stepX, Mathf.Sin((Time.frameCount*speed)+(i*offset)), 0);
+    }
+}
+
+//some primitives to try
+//PrimitiveType.Plane
+//PrimitiveType.Cube
+//PrimitiveType.Sphere
+//PrimitiveType.Capsule
+//PrimitiveType.Cylinder
+
+```
 
 resources
 --
