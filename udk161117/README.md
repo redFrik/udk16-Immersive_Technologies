@@ -91,12 +91,6 @@ a= {var arr= (0.125, 0.1876 .. 1.0); Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr,
 a.release;
 ```
 
-some more examples...
-```
-a= {var arr= (0.1, 0.15 .. 4)/8; Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
-a.release;
-```
-
 here is last week's example again but using this technique for triggering the sound grains.
 
 ```
@@ -120,20 +114,33 @@ a= {var num= 32, speed= 0.4, arr= (1, 2 .. num); Limiter.ar(Splay.ar(SinOsc.ar((
 a.release;
 ```
 
+some more examples...
+
+```
+//79 pings
+a= {var arr= (0.1, 0.15 .. 4)/8; Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
+a.release;
+
+//use a scale to pitch buffer sample playback
+a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(1, Impulse.ar(arr), b.bufnum, Scale.minorPentatonic.degrees.midiratio, 0, 0.5))}.play;
+a.release;
+```
+
 now watch this... <https://vimeo.com/16977985> to see a visualization of what's going on.
 
 unity
 --
 
 * start unity and create a new project
-* turn off Y gravity under Edit / Project Settings / Physics (the default is -9.81 which roughly correspond to our earth's gravity)
+* turn off Y gravity under Edit / Project Settings / Physics (the default is -9.81 which roughly correspond to gravity here on our earth)
 
 ![zerogravity](02zerogravity.png?raw=true "zerogravity")
 
 * select GameObject / Create Empty
 * go to the inspector and add tag "Cube" (click the + and make sure you type Cube with a capital C)
 * select add component, new javascript. call it anything
-* open the script and add the following code... (replace what is there by default)
+* open the script and copy&paste the code here below (replace what is there by default)
+* save, go back to unity and press play
 
 ```javascript
 var stepX= 1.2;
@@ -162,8 +169,144 @@ function Update() {
 //PrimitiveType.Sphere
 //PrimitiveType.Capsule
 //PrimitiveType.Cylinder
-
 ```
+
+play around with the camera and also try changing things in the code. with 100 objects of type `Sphere` and with some fiddling around with the varables, you can get something like this snake...
+
+![snake](03snake.png?raw=true "snake")
+
+we can also add an amplitude variable. and another importaint feature to add is that the speed of each object should be tied to the index. so the first object (when `i= 0` in the for loop) should move slow, the next object a little bit faster and so on. it's easy to do with a `*(i+1)*timeFactor` - see the code below.
+
+* copy&paste the code below into your javascript in MonoDevelop, replacing what was there
+* save and go back to unity
+* (if you're still in run mode) after a second or two the scene should change automatically
+
+```javascript
+var stepX= 1.2;
+var speed= 0.005;
+var offset= 0.2;
+var amp= 1.5;   //scale the wave
+var timeFactor= 0.1;
+
+function Start() {
+    var num= 100;    //how many objects
+    for (var i= 0; i<num; i++) {
+        var cube= GameObject.CreatePrimitive(PrimitiveType.Sphere);   //here try different primitives
+        cube.tag= "Cube";
+        cube.AddComponent.<Rigidbody>();
+    }
+}
+function Update() {
+    var cubes : GameObject[];
+    cubes= GameObject.FindGameObjectsWithTag("Cube");
+    for(var i= 0; i<cubes.length; i++) {
+        cubes[i].transform.position= Vector3(i*stepX, Mathf.Sin((Time.frameCount*speed*(i+1)*timeFactor)+(i*offset))*amp, 0);
+    }
+}
+```
+
+now we add a cosine for the x axis to get a spiral. and we also clean up the code a little bit by adding more variables (x, y, theta)...
+
+```javascript
+var speed= 0.005;
+var offset= 0.2;
+var amp= 0.1;   //scale the wave
+var timeFactor= 0.1;
+
+function Start() {
+    var num= 100;    //how many objects
+    for (var i= 0; i<num; i++) {
+        var cube= GameObject.CreatePrimitive(PrimitiveType.Sphere);   //here try different primitives
+        cube.tag= "Cube";
+        cube.AddComponent.<Rigidbody>();
+    }
+}
+function Update() {
+    var cubes : GameObject[];
+    cubes= GameObject.FindGameObjectsWithTag("Cube");
+    for(var i= 0; i<cubes.length; i++) {
+        var iamp= amp*(i+1);
+        var theta= (Time.frameCount*speed*(i+1)*timeFactor)+(i*offset);
+        var x= Mathf.Cos(theta)*iamp;
+        var y= Mathf.Sin(theta)*iamp;
+        cubes[i].transform.position= Vector3(x, y, 0);
+    }
+}
+```
+
+![spiral](04spiral.png?raw=true "spiral")
+
+last we add a sine function for the z axis as well. zoom out the main camera a bit and you should see a complex structure spiraling around in three dimensions.
+
+```javascript
+var speed= 0.005;
+var offset= 0.2;
+var amp= 0.1;   //scale the wave
+var timeFactor= 0.1;
+var zfactor= 0.3;
+
+function Start() {
+    var num= 100;    //how many objects
+    for (var i= 0; i<num; i++) {
+        var cube= GameObject.CreatePrimitive(PrimitiveType.Sphere);   //here try different primitives
+        cube.tag= "Cube";
+        cube.AddComponent.<Rigidbody>();
+    }
+}
+function Update() {
+    var cubes : GameObject[];
+    cubes= GameObject.FindGameObjectsWithTag("Cube");
+    for(var i= 0; i<cubes.length; i++) {
+        var iamp= amp*(i+1);
+        var theta= (Time.frameCount*speed*(i+1)*timeFactor)+(i*offset);
+        var x= Mathf.Cos(theta)*iamp;
+        var y= Mathf.Sin(theta)*iamp;
+        var z= Mathf.Sin(theta*zfactor)*iamp;
+        cubes[i].transform.position= Vector3(x, y, z);
+    }
+}
+```
+
+you can also add a texture by...
+
+* drag&drop a picture file into assets
+* create a folder (left or control click) and name it Resources
+* move your picture file into the resources folder (see screenshot below)
+* then take this code and edit the filename to match your file...
+
+```javascript
+var speed= 0.005;
+var offset= 0.2;
+var amp= 0.1;   //scale the wave
+var timeFactor= 0.1;
+var zfactor= 0.3;
+
+function Start() {
+    var num= 100;    //how many objects
+    var tex = Resources.Load("Immersive_Technologies") as Texture;	//here edit to match your filename
+    print(tex); //null if not found
+    for (var i= 0; i<num; i++) {
+        var cube= GameObject.CreatePrimitive(PrimitiveType.Sphere);   //here try different primitives
+        cube.tag= "Cube";
+        cube.AddComponent.<Rigidbody>();
+        cube.GetComponent.<Renderer>().material.mainTexture= tex;
+    }
+}
+function Update() {
+    var cubes : GameObject[];
+    cubes= GameObject.FindGameObjectsWithTag("Cube");
+    for(var i= 0; i<cubes.length; i++) {
+        var iamp= amp*(i+1);
+        var theta= (Time.frameCount*speed*(i+1)*timeFactor)+(i*offset);
+        var x= Mathf.Cos(theta)*iamp;
+        var y= Mathf.Sin(theta)*iamp;
+        var z= Mathf.Sin(theta*zfactor)*iamp;
+        cubes[i].transform.position= Vector3(x, y, z);
+    }
+}
+```
+
+![texture](06texture.png?raw=true "texture")
 
 resources
 --
