@@ -236,7 +236,7 @@ function Update() {
 
 ![spiral](04spiral.png?raw=true "spiral")
 
-last we add a sine function for the z axis as well. zoom out the main camera a bit and you should see a complex structure spiraling around in three dimensions.
+we can add a sine function for the z axis as well. zoom out the main camera a bit and you should see a complex structure spiraling around in three dimensions.
 
 ```javascript
 var speed= 0.005;
@@ -307,6 +307,15 @@ function Update() {
 ```
 
 ![texture](06texture.png?raw=true "texture")
+
+last this line will scale the objects in size depending on index (i). the 0.1 is the scale factor - try to make it a variable.
+
+```javascript
+//add this line to the Update for loop - right after the `cubes[i].transform.position` line
+cubes[i].transform.localScale= Vector3((i+1)*0.1, (i+1)*0.1, (i+1)*0.1);    //here scale
+```
+
+![scale](07scale.png?raw=true "scale")
 
 resources
 --
