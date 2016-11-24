@@ -15,7 +15,7 @@ dates
 - [x] [03nov 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161103): basic supercollider, basic unity
 - [x] [10nov 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161110): more supercollider, more unity
 - [x] [17nov 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161117): whitney
-- [ ] 24nov 14-16
+- [ ] [24nov 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161124): phasing
 - [ ] 01dec 14-16
 - [ ] 08dec 14-16
 - [ ] 15dec 14-16
