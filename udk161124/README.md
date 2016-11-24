@@ -17,6 +17,9 @@ a.release(2);
 a= {SinOsc.ar([300, 304.5], 0, 0.5)}.play;  //theta
 a.release(2);
 
+a= {SinOsc.ar([300, 302], 0, 0.5)}.play;  //delta
+a.release(2);
+
 a= {SinOsc.ar([300, 300+MouseX.kr(0, 50).poll]+MouseY.kr(-100, 100), 0, 0.5)}.play;  //xy control
 a.release(2);
 
@@ -63,7 +66,7 @@ first we create a cube with a light attached...
 
 next we add a script so that the light moves up and down.
 
-* select Point Light in the Hierachy menu
+* select Point Light in the Hierarchy menu
 * in the Inspector window select 'Add Component'
 * select 'New Script', call it something (here light) and make sure language is javascript
 * double click the light script icon under assets and Mono Develop should start
