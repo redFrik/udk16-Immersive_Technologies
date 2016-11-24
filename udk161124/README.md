@@ -1,6 +1,9 @@
 phasing
 --------------------
 
+binaural beats - <https://en.wikipedia.org/wiki/Binaural_beats>
+
+online generator - <http://fractalpanda.com/binaural-beats-generator/>
 
 supercollider
 --
@@ -8,9 +11,14 @@ supercollider
 playing around with beating sines / binaural beats...
 
 ```
-a= {SinOsc.ar([400, 401], 0, 0.5)}.play;
-a.release;
+a= {SinOsc.ar([300, 308], 0, 0.5)}.play;  //alpha
+a.release(2);
 
+a= {SinOsc.ar([300, 304.5], 0, 0.5)}.play;  //theta
+a.release(2);
+
+a= {SinOsc.ar([300, 300+MouseX.kr(0, 50).poll]+MouseY.kr(-100, 100), 0, 0.5)}.play;  //xy control
+a.release(2);
 ```
 
 unity
@@ -109,6 +117,8 @@ again click run and go into each gameobject / cube / light and change the speed.
 
 play around with changing position, scale, rotation for a gameobject or for a single cube.
 
+(obviously we could create all the cubes and lights directory with a script, but here we did it manually for learning)
+
 now go into Mono Develop and start changing the script (keep running in unity). copy the code below, save, change some numbers, save again etc.
 
 ```javascript
@@ -149,3 +159,8 @@ function Update () {
 last select Assets / Import Package / Characters, find the FPSController in Prefabs and drop it onto your scene. run around on the disco floor.
 
 ![disco](05disco.png?raw=true "disco")
+
+resources
+--
+
+Newbie guide to Unity Javascript - <https://forum.unity3d.com/threads/newbie-guide-to-unity-javascript-long.34015/>
