@@ -19,6 +19,31 @@ a.release(2);
 
 a= {SinOsc.ar([300, 300+MouseX.kr(0, 50).poll]+MouseY.kr(-100, 100), 0, 0.5)}.play;  //xy control
 a.release(2);
+
+
+a= {SinOsc.ar([200, 201], 0, 0.5)}.play(fadeTime: 20);
+a.release;
+b= {SinOsc.ar([300, 302.2], 0, 0.5)}.play(fadeTime: 20);
+b.release;
+c= {SinOsc.ar([400, 403.3], 0, 0.5)}.play(fadeTime: 20);
+c.release;
+d= {SinOsc.ar([500, 504.4], 0, 0.5)}.play(fadeTime: 20);
+d.release;
+//etc
+
+
+//same thing but with a 'fatter' sound using SinOscFB
+a= {SinOscFB.ar([200, 201], 1, 0.5)}.play(fadeTime: 20);
+a.release;
+b= {SinOscFB.ar([300, 302.2], 1, 0.5)}.play(fadeTime: 20);
+b.release;
+c= {SinOscFB.ar([400, 403.3], 1, 0.5)}.play(fadeTime: 20);
+c.release;
+d= {SinOscFB.ar([500, 504.4], 1, 0.5)}.play(fadeTime: 20);
+d.release;
+e= {SinOscFB.ar([50, 51], 1, 0.5)}.play(fadeTime: 20);
+e.release;
+//etc
 ```
 
 unity
