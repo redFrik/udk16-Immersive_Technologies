@@ -8,7 +8,7 @@ supercollider
 
 NOTE: everyone should be connected to the same network for the following to work.
 
-and also make sure your firewall is not blocking incomming udp connections on ports 57110 (scserver) and 57120 (sclang). (on osx you are often asked when starting sc if you want to allow incoming network connections or not).
+and also make sure your firewall is not blocking incomming udp connections on ports 57110 (scserver) and 57120 (sclang). (on osx you are often asked when starting programs if you want to allow incoming network connections or not - select allow for supercollider and unity).
 
 ```
 
@@ -149,11 +149,18 @@ public function AllMessageHandler(oscMessage: OscMessage) {
 }
 ```
 
+the script above expects a Cube and a Sphere in the scene. to add them do this...
+
+* select GameObject / 3D Object / Cube
+* select GameObject / 3D Object / Sphere
+
+and before running, for the scene not to halt when we use supercollider, do the following...
+
 * go to Edit / Project Settings / Player and tick 'Run In Background'
 
 ![02run_background](02run_background.png?raw=true "run_background")
 
-* now hit run, swtich over to supercollider and try the following code...
+* now hit run, switch over to supercollider and try the following code...
 
 ```
 //supercollider code:
@@ -174,6 +181,21 @@ s.waitForBoot{
 };
 )
 
+//more cube control
+(
+n= NetAddr("127.0.0.1", 8400);
+s.waitForBoot{
+    {
+        var mf= SinOsc.kr(1+SinOsc.ar(0.1)*3).exprange(200, 2000);
+        SendReply.kr(Impulse.kr(60), '/freq', mf);
+        SinOsc.ar(mf, 0, 0.5).dup(2);
+    }.play;
+    OSCdef(\freq, {|msg|
+        msg.postln;  //debug
+        n.sendMsg("/Cube", 1, msg[3].linlin(200, 5000, 0, 10), 1);
+    }, \freq);
+};
+)
 ```
 
 try to send from your supercollider to your neighbour's unity program.
