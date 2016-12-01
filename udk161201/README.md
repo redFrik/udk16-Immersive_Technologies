@@ -93,11 +93,11 @@ unity
 * select GameObject / Create Empty
 * in the inspector select 'Add Component / Scripts / Osc'
 * and again select 'Add Component / Scripts / UDP Packet IO'
-* you scene should now look like this and these steps you'll always need to do to be able to send and receive osc...
+* your scene should now look like this and these steps are always needed when you want to send and receive osc...
 
 ![01init](01init.png?raw=true "init")
 
-now let us create a receiver script.
+now let us create a custom receiver script.
 
 * make sure the GameObject is selected in Hierarchy window like before
 * in the inspector select 'Add Component / New Script'
@@ -168,20 +168,76 @@ and before running, for the scene not to halt when we use supercollider, do the 
 n= NetAddr("127.0.0.1", 8400);
 n.sendMsg("/Cube", 0, 0, 0.5)
 n.sendMsg("/Sphere", 1, 5, 1)
+```
 
+you should see the cube and sphere change when you send these commands. try with different values.
 
+then try the following code which takes sound input from the built-in microphone, does amplitude tracking and then sends over that data to unity.
+
+```
+//mic amplitude controls sphere height
 (
 n= NetAddr("127.0.0.1", 8400);
 s.waitForBoot{
     {SendReply.kr(Impulse.kr(60), '/amp', Amplitude.kr(SoundIn.ar, 0.01, 0.1).lag(0.1)); DC.ar(0)}.play;
     OSCdef(\amp, {|msg|
         //msg.postln;  //debug
-        n.sendMsg("/Sphere", 1, msg[3], 1);
+        n.sendMsg("/Sphere", 1, msg[3]*10, 1);
     }, \amp);
 };
 )
+```
 
-//more cube control
+last we edit the receiver script in MonoDevelop a little bit. now only the cube is active and instead of rotating, it will change position.
+
+```javascript
+//this code is a template for receiving osc - edit to match your scene
+#pragma strict
+
+public var RemoteIP : String = "127.0.0.1";
+public var SendToPort : int = 57120;
+public var ListenerPort : int = 8400;
+private var osc : Osc;
+
+public var crx : float = 0;
+public var cry : float = 0;
+public var crz : float = 0;
+//public var sphereScale : Vector3 = Vector3(1, 2, 3);
+
+function Start () {
+    var udp : UDPPacketIO = GetComponent("UDPPacketIO");
+    udp.init(RemoteIP, SendToPort, ListenerPort);
+    osc = GetComponent("Osc");
+    osc.init(udp);
+    osc.SetAllMessageHandler(AllMessageHandler);
+}
+
+function Update () {
+    GameObject.Find("Cube").transform.localPosition= Vector3(crx, cry, crz);
+    //GameObject.Find("Sphere").transform.localScale= sphereScale;
+}
+
+public function AllMessageHandler(oscMessage: OscMessage) {
+    var msgString = Osc.OscMessageToString(oscMessage);
+    var msgAddress = oscMessage.Address;
+    var msgValue = oscMessage.Values;
+    Debug.Log(msgString);
+    if(msgAddress == "/Cube") {
+        crx= msgValue[0];
+        cry= msgValue[1];
+        crz= msgValue[2];
+    } //else if(msgAddress == "/Sphere") {
+        //sphereScale.x= msgValue[0];
+        //sphereScale.y= msgValue[1];
+        //sphereScale.z= msgValue[2];
+    //}
+}
+```
+
+and with the following supercollider code you should see the cube move up and down depending on pitch.
+
+```
+//frequency controls cube y-position
 (
 n= NetAddr("127.0.0.1", 8400);
 s.waitForBoot{
@@ -198,4 +254,4 @@ s.waitForBoot{
 )
 ```
 
-try to send from your supercollider to your neighbour's unity program.
+also try to send from your supercollider to your neighbour's unity program.
