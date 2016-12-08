@@ -11,7 +11,6 @@ NOTE: everyone should be connected to the same network for the following to work
 and also make sure your firewall is not blocking incomming udp connections on ports 57110 (scserver) and 57120 (sclang). (on osx you are often asked when starting programs if you want to allow incoming network connections or not - select allow for supercollider and unity).
 
 ```
-
 OSCFunc.trace(true, true);  //just post what comes in to sc on port 57120
 
 n= NetAddr("127.0.0.1", 57120);  //your own ip address (aka loopback or localhost)
@@ -164,7 +163,7 @@ and before running, for the scene not to halt when we use supercollider, do the 
 
 ```
 //supercollider code:
-//use with example script 'OSCReceiver'
+//use with example script 'receiver'
 n= NetAddr("127.0.0.1", 8400);
 n.sendMsg("/Cube", 0, 0, 0.5)
 n.sendMsg("/Sphere", 1, 5, 1)
