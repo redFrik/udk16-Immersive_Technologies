@@ -17,9 +17,9 @@ dates
 - [x] [17nov 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161117): whitney
 - [x] [24nov 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161124): phasing
 - [x] [01dec 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161201): network
-- [ ] [08dec 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161208): more network
-- [ ] 15dec 14-16
-- [ ] 05jan 14-16
+- [x] [08dec 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161208): more network
+- [ ] 15dec 14-16: advanced network
+- [ ] 05jan 14-16: present own project idea
 - [ ] 12jan 14-16
 - [ ] 19jan 14-16
 - [ ] 26jan 14-16
