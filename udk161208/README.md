@@ -1,6 +1,8 @@
 more network
 --------------------
 
+this time we will send osc from unity to supercollider.
+
 supercollider
 --
 
@@ -12,9 +14,9 @@ remember you can drag&drop files from desktop on to the supercollider code docum
 s.boot;
 
 //load some soundfiles into buffers
-a= Buffer.readChannel(s, "/Users/asdf/Desktop/125bpm Loops n Lines/Beat Mixes/ND_BeatMixA125-01.wav", channels: [0]);
-b= Buffer.readChannel(s, "/Users/asdf/Desktop/125bpm Loops n Lines/Guitar/ND_EnvGuitar_125_A-01.wav", channels: [0]);
-c= Buffer.readChannel(s, "/Users/asdf/Desktop/125bpm Loops n Lines/Kit Breaks/ND_BreakC125-01.wav", channels: [0]);
+a= Buffer.readChannel(s, "/Users/asdf/Desktop/ND_BeatMixA125-01.wav", channels: [0]);
+b= Buffer.readChannel(s, "/Users/asdf/Desktop/ND_EnvGuitar_125_A-01.wav", channels: [0]);
+c= Buffer.readChannel(s, "/Users/asdf/Desktop/ND_BreakC125-01.wav", channels: [0]);
 
 //test so that the buffers loaded
 a.play;
@@ -48,7 +50,7 @@ p.sendMsg(\sfplay, 3.rand);
 //etc
 ```
 
-this only works if we are all on the same network and all have three soundfiles loaded.
+this only works if we are all on the same network and all have the oscdef listener with three soundfiles loaded.
 
 unity
 --
@@ -106,6 +108,7 @@ function Update () {
     var x : float = fps.transform.position.x;
     var y : float = fps.transform.position.y;
     var z : float = fps.transform.position.z;
+    //here could optimize to only send when character is moving
     var msg : OscMessage;
     msg= Osc.StringToOscMessage("/fps "+x+" "+y+" "+z);
     osc.Send(msg);
@@ -166,12 +169,12 @@ OSCdef(\fps, {|msg|
 )
 ```
 
-now run far on the terrain to turn up the frequencies in left and right channel.
+now run far out on the terrain to turn up the frequencies in left and right channel. jump to make the frequency go up/down quickly.
 
 then go back to supercollider and run the following code. it requires a soundfile (aiff or wav) and by moving around in the terrain you also control trigger rate and offset position of the soundfile granulator (TGrains).
 
 ```
-b.free; b= Buffer.readChannel(s, "/Users/asdf/Desktop/125bpm Loops n Lines/Beat Mixes/ND_BeatMixA125-01.wav", channels: [0]);
+b.free; b= Buffer.readChannel(s, "/Users/asdf/Desktop/ND_BeatMixA125-01.wav", channels: [0]);
 
 (
 var syn= {|rate= 0, offset= 0, dur= 0.1|
@@ -206,11 +209,11 @@ let's make the world a bit more interesting by adding a texture and some heights
 * click on the terrain to add height, shift+click to remove height
 * your scene should look something like this...
 
-![03scenery](03scenery.png?raw=true "scenery")
+![03terrain](03terrain.png?raw=true "terrain")
 
-you might need to move up the FPSController's initial position so that it doesn't fall through the terrain to begin with (just increase Y position under Transform).
+NOTE: you might need to move up the FPSController's initial position so that it doesn't fall through the terrain to begin with (just increase Y position under Transform).
 
-play around with texture mapping, terrain heights, fps run and jump speed, load different soundfiles and pictures etc.
+play around with texture mapping, terrain heights, fpscontroller run and jump speed, load different soundfiles and pictures etc.
 
 remote control
 --
@@ -220,3 +223,47 @@ collaborate and try to control your neighbour's sounds by changing the following
 ```javascript
 public var RemoteIP : String = "127.0.0.1";  //edit to match neighbour ip. e.g. "192.168.1.52"
 ```
+
+as a last experiment we can try to broadcast to all. use this (only slightly modified) script in unity...
+
+```javascript
+//this code is another template for sending osc - edit to match your scene
+#pragma strict
+
+public var RemoteIP : String = "192.168.1.255";  //255= broadcast to all
+public var SendToPort : int = 57120;
+public var ListenerPort : int = 8400;
+private var osc : Osc;
+private var lastx : float;
+private var lasty : float;
+private var lastz : float;
+
+function Start () {
+    var udp : UDPPacketIO = GetComponent("UDPPacketIO");
+    udp.init(RemoteIP, SendToPort, ListenerPort);
+    osc = GetComponent("Osc");
+    osc.init(udp);
+}
+
+function Update () {
+    var fps= GameObject.Find("FPSController");
+    var x : float = fps.transform.position.x;
+    var y : float = fps.transform.position.y;
+    var z : float = fps.transform.position.z;
+    if((lastx!=x)||(lasty!=y)||(lastz!=z)) {  //filter out repetitions so only send when moving
+        var msg : OscMessage;
+        msg= Osc.StringToOscMessage("/fps "+x+" "+y+" "+z);
+        osc.Send(msg);
+        lastx= x;
+        lasty= y;
+        lastz= z;
+    }
+}
+
+function OnDisable() {
+    osc.Cancel();
+    osc = null;
+}
+```
+
+NOTE: this might not work on certain networks - the router have to be set up to allow broadcasting (which home routers usually are, while routers in institutions not).
