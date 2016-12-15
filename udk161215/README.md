@@ -1,7 +1,7 @@
 advanced network
 --------------------
 
-here are some examples of setting up particle systems in unity and either control particles with supercollider or generate sound from particles.
+here are some examples of setting up particle systems in unity and either control particles with supercollider or generate sound from particles colliding.
 
 general setup
 --
@@ -98,7 +98,7 @@ first make sure you perform the [general setup](#general-setup) above.
 * select GameObject / 3D Object / Plane
 * select GameObject / Particle System
 * in the inspector set the following:
-  * set Position Y to 4 (to move the particles up)
+  * set Position Y to 10 (to move the particles up)
   * set Rotation X to 0
   * set Start Speed to 0
   * set Gravity Modifier to 1
@@ -184,6 +184,30 @@ now click play and go to supercollider. see incoming data with...
 
 ```
 OSCFunc.trace(true, true);
+```
+
+then try this sounding example...
+
+```
+(
+SynthDef(\coll, {|freq= 400, amp= 0.5, atk= 0.001, rel= 0.01, pan= 0|
+    var env= EnvGen.ar(Env.perc(atk, rel, amp), doneAction:2);
+    var snd= SinOsc.ar(freq);
+    OffsetOut.ar(0, Pan2.ar(snd*env, pan));
+}).add;
+OSCdef(\coll, {|msg|
+    var index, px, py, pz, vx, vy, vz;
+    //msg.postln;
+    index= msg[1];
+    px= msg[2];
+    py= msg[3];
+    pz= msg[4];
+    vx= msg[5];
+    vy= msg[6];
+    vz= msg[7];
+    Synth(\coll, [\freq, (index+2)*200, \amp, vy.linlin(-10, 0, 1, 0)]);
+}, \collide);
+)
 ```
 
 resources
