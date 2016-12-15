@@ -105,6 +105,7 @@ first make sure you perform the [general setup](#general-setup) above.
   * set Start Color to something else than White
 * now scroll down and tick Collision
 * expand Collision tab and set the following:
+  * select Plane under Planes
   * untick Visualize Bounds
   * set Bounce to 0.5
   * tick Send Collision Messages
