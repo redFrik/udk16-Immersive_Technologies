@@ -11,6 +11,23 @@ NOTE: this will only work with windows machines and [HTC Vive](https://www.vive.
 
 * create a new project in unity
 * go to Edit / Project Settings / Player and tick 'Run In Background'
+
+install the SteamVR Plugin...
+
+* go to Asset Store and search for 'steamvr'
+* find and import the 'SteamVR Plugin'
+* click on 'import' and then 'Accept All' in the two popup windows
+* drag the three prefabs 'CameraRig', 'Status' and 'SteamVR' from Assets / SteamVR / Prefabs into the Hierarchy window
+
+fix the main camera offset 'bug'...
+
+* select 'Main Camera' in Hierarchy window
+* in the inspector select 'Add Component / Scripts / Steam VR_Camera'
+* edit the Transform Position to be 0, 0, 0
+* optionally add a Cube in the middle so it is easier to orient yourself
+
+install the osc plugins...
+
 * go to https://github.com/heaversm/unity-osc-receiver and click the green download button
 * get the .zip file and uncompress it
 * find the folder Plugins in the zip you just uncompressed (unity-osc-receiver-master / Assets)
@@ -18,21 +35,11 @@ NOTE: this will only work with windows machines and [HTC Vive](https://www.vive.
 * select GameObject / Create Empty
 * in the inspector select 'Add Component / Scripts / Osc'
 * and again select 'Add Component / Scripts / UDP Packet IO'
-
-* go to Asset Store and search for 'steamvr'
-* find and import the 'SteamVR Plugin'
-* click on 'import' and then 'Accept All' in the two popup windows
-* drag the three prefabs 'CameraRig', 'Status' and 'SteamVR' from Assets / SteamVR / Prefabs into the Hierarchy window
-
-* select 'Main Camera' in Hierarchy window
-* in the inspector select 'Add Component / Scripts / Steam VR_Camera'
-* edit the Transform Position to be 0, 0, 0
-* optionally add a Cube in the middle so it is easier to orient yourself
-
+* select 'Add Component / New Script'
 * call it something (here 'vrosc'), make sure language is javascript and click 'Create and Add'
 * double click the script to open it in MonoDevelop
 * paste in the code below replacing what was there
-* edit the 'Remote IP' to match your network (.255 in the end will broadcast)
+* in the code edit the 'Remote IP' to match your network (.255 in the end will broadcast)
 * select GameObject in Hierarchy window and drag the following three things onto the inspector
   * Camera (head) drag to 'Camhead'
   * Controller (left) drag to 'Ctrlleft'
