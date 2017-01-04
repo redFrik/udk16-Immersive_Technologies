@@ -117,6 +117,8 @@ function OnDisable() {
 }
 ```
 
+NOTE: if the osc communication is jerky, make sure to click 'Maximize on play'
+
 reference
 --
 
