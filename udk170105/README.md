@@ -24,6 +24,11 @@ NOTE: this will only work with windows machines and [HTC Vive](https://www.vive.
 * click on 'import' and then 'Accept All' in the two popup windows
 * drag the three prefabs 'CameraRig', 'Status' and 'SteamVR' from Assets / SteamVR / Prefabs into the Hierarchy window
 
+* select 'Main Camera' in Hierarchy window
+* in the inspector select 'Add Component / Scripts / Steam VR_Camera'
+* edit the Transform Position to be 0, 0, 0
+* optionally add a Cube in the middle so it is easier to orient yourself
+
 * call it something (here 'vrosc'), make sure language is javascript and click 'Create and Add'
 * double click the script to open it in MonoDevelop
 * paste in the code below replacing what was there
@@ -104,3 +109,8 @@ function OnDisable() {
     osc = null;
 }
 ```
+
+reference
+--
+
+https://forum.unity3d.com/threads/unity-vr-samples-now-available.372753/
