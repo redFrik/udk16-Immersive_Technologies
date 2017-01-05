@@ -1,6 +1,46 @@
 projects and vr
 --------------------
 
+presentation of own projects
+
+projects
+--
+
+questions for presentations...
+
+* what is the general concept (how will it look, sound, work)?
+* how will it be presented (standalone, web, performance, installation...)?
+* who is it for (yourself, single player, group of people collaborating, general audience, showcase...)?
+* how will i do it and what parts do i need help with (from tutor or fellow students)?
+
+some suggested projects (if you do not have any ideas)...
+
+* oscilloscope - take live sound input from supercollider (or any other program) and make a standalone unity app that draw the waveforms.
+  * figure out how soundflower works
+  * extract the audio data from soundflower into an array of numbers
+  * code a script that draw lines from an array of numbers
+  * build a scene for your line drawings - perhaps add a character to be able to move around
+  * create an app and release the standalone
+* portfolio - an online webapp where visitors can browse your works by moving around between pictures.
+  * compile a list of works and a picture for each of them
+  * build a scene, add a controller and place the pictures
+  * make a script that show info text when you come close (or similar)
+  * create a webapp and put up online
+* sequencer - make a scene that you can run around in and objects that act as note triggers in supercollider.
+  * program a triggable drum kit or synthesizer in supercollider
+  * build a scene, add a controller
+  * code a script to place objects
+  * make the objects collision send out osc triggers
+* mobile - create an app for ios and/or android that uses gps position to generate some generative graphics
+  * figure out how to get gps coordinates into unity (LocationInfo)
+  * build a scene with a script that generates dynamic graphics and perhaps add sound
+  * learn how to compile unity scenes for ios and android
+  * try it out on a few different mobile devices
+* virtual reality - build something immersive for the htc vive system
+  * get permission to access the machines
+  * set up a simple project (like below but without osc)
+  * get everything to work... calibration, room dimensions, offsets etc
+  * create your own scene from scratch
 
 virtual reality
 --
