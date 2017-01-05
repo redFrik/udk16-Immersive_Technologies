@@ -43,7 +43,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 299.0, 142.0, 37.0, 22.0 ],
+					"patching_rect" : [ 514.0, 338.0, 37.0, 22.0 ],
 					"style" : "",
 					"text" : "clear"
 				}
@@ -56,7 +56,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 720.0, 144.0, 59.0, 20.0 ],
-					"presentation_rect" : [ 720.0, 147.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "deltatime"
 				}
@@ -69,7 +68,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 509.0, 451.0, 79.0, 20.0 ],
-					"presentation_rect" : [ 470.0, 452.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "longest delta"
 				}
@@ -82,7 +80,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 614.0, 292.0, 208.0, 20.0 ],
-					"presentation_rect" : [ 615.0, 295.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "deltatime for incoming osc messages"
 				}
@@ -261,10 +258,10 @@
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 1,
-					"outlettype" : [ "int" ],
-					"patching_rect" : [ 619.0, 204.0, 47.0, 22.0 ],
+					"outlettype" : [ "float" ],
+					"patching_rect" : [ 619.0, 204.0, 51.0, 22.0 ],
 					"style" : "",
-					"text" : "!/ 1000"
+					"text" : "!/ 1000."
 				}
 
 			}
@@ -417,6 +414,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-21", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-16", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-35", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-16", 0 ]
@@ -582,15 +588,6 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-3", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-35", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-3", 3 ]
 				}
 
 			}
