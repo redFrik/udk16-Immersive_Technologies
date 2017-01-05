@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OscCS : MonoBehaviour {
+public class VrOscCS : MonoBehaviour {
 	//public string remoteIp = "194.95.203.102";	//to a single laptop running sc
 	public string remoteIp = "194.95.203.255";		//broadcast to all laptops running sc on network
 	public int sendToPort = 57120;
@@ -10,7 +10,7 @@ public class OscCS : MonoBehaviour {
 	public GameObject ctrlleft;
 	public GameObject ctrlright;
 	private Osc osc;
-	~OscCS() {
+	~VrOscCS() {
 		if(osc!=null) {
 			osc.Cancel();
 		}

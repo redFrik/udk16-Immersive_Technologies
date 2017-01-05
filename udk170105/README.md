@@ -29,7 +29,7 @@ some suggested projects (if you do not have any ideas)...
 * sequencer - make a scene that you can run around in and objects that act as note triggers in supercollider.
   * program a triggable drum kit or synthesizer in supercollider
   * build a scene, add a controller
-  * code a script to place objects
+  * code a script to place objects (in patterns, grid structure etc)
   * make the objects collision send out osc triggers
 * mobile - create an app for ios and/or android that uses gps position to generate some generative graphics
   * figure out how to get gps coordinates into unity (LocationInfo)
@@ -39,8 +39,8 @@ some suggested projects (if you do not have any ideas)...
 * virtual reality - build something immersive for the htc vive system
   * get permission to access the machines
   * set up a simple project (like below but without osc)
-  * get everything to work... calibration, room dimensions, offsets etc
-  * create your own scene from scratch
+  * get everything to work in the simple project... calibration, room dimensions, offsets etc
+  * now expand and create your own scene
 
 virtual reality
 --
@@ -130,24 +130,24 @@ function Update() {
     +camhead.transform.rotation.z
 );
 osc.Send(msg);
-msg= Osc.StringToOscMessage("/ctrlleft "
-    +ctrlleft.transform.position.x+" "
-    +ctrlleft.transform.position.y+" "
-    +ctrlleft.transform.position.z+" "
-    +ctrlleft.transform.rotation.x+" "
-    +ctrlleft.transform.rotation.y+" "
-    +ctrlleft.transform.rotation.z
-);
-osc.Send(msg);
-msg= Osc.StringToOscMessage("/ctrlright "
-    +ctrlright.transform.position.x+" "
-    +ctrlright.transform.position.y+" "
-    +ctrlright.transform.position.z+" "
-    +ctrlright.transform.rotation.x+" "
-    +ctrlright.transform.rotation.y+" "
-    +ctrlright.transform.rotation.z
-);
-osc.Send(msg);
+    msg= Osc.StringToOscMessage("/ctrlleft "
+        +ctrlleft.transform.position.x+" "
+        +ctrlleft.transform.position.y+" "
+        +ctrlleft.transform.position.z+" "
+        +ctrlleft.transform.rotation.x+" "
+        +ctrlleft.transform.rotation.y+" "
+        +ctrlleft.transform.rotation.z
+    );
+    osc.Send(msg);
+    msg= Osc.StringToOscMessage("/ctrlright "
+        +ctrlright.transform.position.x+" "
+        +ctrlright.transform.position.y+" "
+        +ctrlright.transform.position.z+" "
+        +ctrlright.transform.rotation.x+" "
+        +ctrlright.transform.rotation.y+" "
+        +ctrlright.transform.rotation.z
+    );
+    osc.Send(msg);
 }
 function OnDisable() {
     var msg : OscMessage = Osc.StringToOscMessage("/shutdown");
