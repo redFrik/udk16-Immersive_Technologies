@@ -13,8 +13,8 @@
 
 #pragma strict
 
-//public var RemoteIP : String = "194.95.203.102";	//to a single laptop running sc
-public var RemoteIP : String = "194.95.203.255";	//broadcast to all laptops running sc on network
+public var RemoteIP : String = "194.95.203.102";	//to a single laptop running sc
+//public var RemoteIP : String = "194.95.203.255";	//broadcast to all laptops running sc on network
 public var SendToPort : int = 57120;
 private var ListenerPort : int = 8400;	//unused
 public var camhead : GameObject;

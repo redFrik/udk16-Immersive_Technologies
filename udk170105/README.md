@@ -45,9 +45,9 @@ some suggested projects (if you do not have any ideas)...
 virtual reality
 --
 
-how to set up osc broadcast from vive vr head+controllers (absolute position & rotation) using unity.
+how to set up osc sending from vive vr head+controllers (absolute position & rotation) using unity.
 
-NOTE: this will only work with windows machines and [HTC Vive](https://www.vive.com) headsets.
+NOTE: this will only work with windows machines and [HTC Vive](https://www.vive.com) system.
 
 * create a new project in unity
 * go to Edit / Project Settings / Player and tick 'Run In Background'
@@ -56,8 +56,8 @@ install the SteamVR Plugin...
 
 * go to Asset Store and search for 'steamvr'
 * find and import the 'SteamVR Plugin'
-* click on 'import' and then 'Accept All' in the two popup windows
-* drag the three prefabs 'CameraRig', 'Status' and 'SteamVR' from Assets / SteamVR / Prefabs into the Hierarchy window
+* click on 'import' in the first and then 'Accept All' in the second popup window
+* drag&drop the three prefabs 'CameraRig', 'Status' and 'SteamVR' from Assets / SteamVR / Prefabs into the Hierarchy window
 
 fix the main camera offset 'bug'...
 
@@ -65,6 +65,7 @@ fix the main camera offset 'bug'...
 * in the inspector select 'Add Component / Scripts / Steam VR_Camera'
 * edit the Transform Position to be 0, 0, 0
 * optionally add a Cube in the middle so it is easier to orient yourself
+* press play and make sure the headset is tracking and that you are in the correct position
 
 install the osc plugins...
 
@@ -79,7 +80,7 @@ install the osc plugins...
 * call it something (here 'vrosc'), make sure language is javascript and click 'Create and Add'
 * double click the script to open it in MonoDevelop
 * paste in the code below replacing what was there
-* in the code edit the 'Remote IP' to match your network (.255 in the end will broadcast)
+* in the code edit the 'Remote IP' to match your receiving laptop
 * select GameObject in Hierarchy window and drag the following three things onto the inspector
   * Camera (head) drag to 'Camhead'
   * Controller (left) drag to 'Ctrlleft'
@@ -102,8 +103,8 @@ install the osc plugins...
 
 #pragma strict
 
-//public var RemoteIP : String = "194.95.203.102";	//to a single laptop running sc
-public var RemoteIP : String = "194.95.203.255";	//broadcast to all laptops running sc on network
+public var RemoteIP : String = "194.95.203.102";	//to a single laptop running sc
+//public var RemoteIP : String = "194.95.203.255";	//broadcast to all laptops running sc on network
 public var SendToPort : int = 57120;
 private var ListenerPort : int = 8400;	//unused
 public var camhead : GameObject;

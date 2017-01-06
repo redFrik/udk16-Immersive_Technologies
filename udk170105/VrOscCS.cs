@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class VrOscCS : MonoBehaviour {
-	//public string remoteIp = "194.95.203.102";	//to a single laptop running sc
-	public string remoteIp = "194.95.203.255";		//broadcast to all laptops running sc on network
+	public string remoteIp = "194.95.203.102";	//to a single laptop running sc
+	//public string remoteIp = "194.95.203.255";		//broadcast to all laptops running sc on network
 	public int sendToPort = 57120;
 	private int listenerPort = 8400;	//unused
 	public GameObject camhead;
