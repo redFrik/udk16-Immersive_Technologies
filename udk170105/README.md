@@ -158,6 +158,35 @@ function OnDisable() {
 }
 ```
 
+and last a supercollider example that uses a single hand controller's position and rotation to scan through sound fragments in a soundfile.
+
+```
+(
+//scanning through a soundfile using a single controller (left)
+s.latency= 0.05;
+s.waitForBoot{
+    b.free; b= Buffer.readChannel(s, "/Users/asdf/ND_BeatMixA125-01.wav", channels:[0]);  //here edit path to your soundfile
+s.sync;
+a= {
+    var pos= \pos.kr([0, 0, 0], 0);
+    var posmin= RunningMin.kr(pos);
+    var posmax= RunningMax.kr(pos);
+    var posnorm= pos-posmin/(posmax-posmin).max(0.001);
+    var rot= \pos.kr([0, 0, 0], 0);
+    var rotmin= RunningMin.kr(rot);
+    var rotmax= RunningMax.kr(rot);
+    var rotnorm= rot-rotmin/(rotmax-rotmin).max(0.001);
+    TGrains.ar(2, Impulse.ar(rotnorm[0].linexp(0, 1, 10, 150)), b.bufnum, posnorm[1].linlin(0, 1, 0.9, 2), posnorm[0]*b.duration, posnorm[2].linlin(0, 1, 0.1, 1))*rotnorm[1]*0.5
+}.play;
+OSCdef(\ctrlleft, {|msg|
+    var pos= msg.copyRange(1, 3);
+    var rot= msg.copyRange(4, 6);
+    a.set(\pos, pos, \rot, rot);
+}, \ctrlleft);
+};
+)
+```
+
 NOTE: if the osc communication is jerky, make sure to click 'Maximize on play'
 
 reference
