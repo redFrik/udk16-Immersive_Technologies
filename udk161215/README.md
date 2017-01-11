@@ -22,7 +22,7 @@ particles triggered by microphone
 * make sure GameObject is selected in the Hierarchy window and select 'Add Component' in the inspector
 * select Effects / Particle System
 * again select 'Add Component / New Script'
-* call it something (here 'receiverSpawn'), make sure language is javascript and click 'Create and Add'
+* call it something (here 'receiverSpawn'), make sure language is **javascript** and click 'Create and Add'
 * double click the script to open it in MonoDevelop
 * paste in the following code replacing what was there...
 

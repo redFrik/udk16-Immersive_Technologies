@@ -77,7 +77,7 @@ install the osc plugins...
 * in the inspector select 'Add Component / Scripts / Osc'
 * and again select 'Add Component / Scripts / UDP Packet IO'
 * select 'Add Component / New Script'
-* call it something (here 'vrosc'), make sure language is javascript and click 'Create and Add'
+* call it something (here 'vrosc'), make sure language is **javascript** and click 'Create and Add'
 * double click the script to open it in MonoDevelop
 * paste in the code below replacing what was there
 * in the code edit the 'Remote IP' to match your receiving laptop

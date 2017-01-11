@@ -83,7 +83,7 @@ now let us create a custom sender script.
 
 * make sure the GameObject is selected in Hierarchy window like before
 * in the inspector select 'Add Component / New Script'
-* call it something (here 'sender'), make sure language is javascript and click 'Create and Add'
+* call it something (here 'sender'), make sure language is **javascript** and click 'Create and Add'
 * double click the script to open it in MonoDevelop
 * paste in the following code replacing what was there...
 

@@ -121,7 +121,7 @@ unity3d
 
 install with 'webgl build support' so that we can export our creations as webpages. if you want to add webgl support later you can do that under file/buildsettings.
 
-![unity_install_webgl](unity_install_webgl.png?raw=true "unity_install_webgl")
+![unity_install_webgl](01unity_install_webgl.png?raw=true "unity_install_webgl")
 
 unity3d introduction videos: <https://unity3d.com/learn/tutorials/topics/interface-essentials>
 

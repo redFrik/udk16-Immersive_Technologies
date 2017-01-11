@@ -44,7 +44,7 @@ using the webcamera as a texture...
 * set the transform scale to  x 5, y 1, z 5 in the plane inspector
 * optionally set the transform y rotation to 180 in the plane inspector
 * select add component at the bottom of the plane inspector
-* select new script, make sure language is set to javascript and call it something (here 'webcam')
+* select new script, make sure language is set to **javascript** and call it something (here 'webcam')
 * your scene should now look like this...
 
 ![webcam](01webcam.png?raw=true "webcam")

@@ -68,7 +68,7 @@ next we add a script so that the light moves up and down.
 
 * select Point Light in the Hierarchy menu
 * in the Inspector window select 'Add Component'
-* select 'New Script', call it something (here light) and make sure language is javascript
+* select 'New Script', call it something (here light) and make sure language is **javascript**
 * double click the light script icon under assets and Mono Develop should start
 * paste in the following code (replacing what was there)...
 
