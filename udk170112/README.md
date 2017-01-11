@@ -42,6 +42,7 @@ mic input
 
 microphone or line-in audio to unity...
 
+* make a new unity 3d project
 * select 'GameObject / Audio / Audio Source'
 * select 'Add Component / New Script'
 * call it something (here 'mic'), make sure language is **javascript** and click 'Create and Add'
@@ -59,7 +60,7 @@ private var buffersize= 2.0;	//sound buffer in seconds
 
 function Start() {
     snd= GetComponent.<AudioSource>();
-    snd.clip= Microphone.Start("Built-in Microphone", true, buffersize, 44100);
+    snd.clip= Microphone.Start(null, true, buffersize, 44100);
     snd.loop= true;
     while(!(Microphone.GetPosition(null)>0)) {}
     //snd.Play();	//monitor
@@ -82,11 +83,79 @@ you should see something like this...
 fft
 --
 
-spectrum - TODO
+to extract the spectrum of audio you can use the built-in GetSpectrumData method.
+
+* make a new unity 3d project
+* select 'GameObject / Audio / Audio Source'
+* select 'Add Component / New Script'
+* call it something (here 'fft'), make sure language is **javascript** and click 'Create and Add'
+* double click the script to open it in MonoDevelop
+* paste in the code below replacing what was there and save
+* make sure you have 'built-in microphone' selected in your system sound input and run the unity scene
+
+```javascript
+#pragma strict
+
+public var scalex= 1.5;
+public var scaley= 5.0;
+private var spectrum : float[];
+private var snd : AudioSource;
+private var buffersize= 512;    //fft buffer size in samples (must be power-of-two)
+
+function Start() {
+    snd= GetComponent.<AudioSource>();
+    snd.clip= Microphone.Start(null, true, 1, 44100);
+    snd.loop= true;
+    while(!(Microphone.GetPosition(null)>0)) {}
+    snd.Play();   //must be playing for GetSpectrumData to work
+    spectrum= new float[buffersize];
+}
+function Update() {
+    snd.GetSpectrumData(spectrum, 0, FFTWindow.Hanning);
+    for(var i= 1; i<spectrum.Length-1; i++) {
+        Debug.DrawLine(new Vector3(Mathf.Log(i-1)*scalex, spectrum[i-1]*scaley, 0), new Vector3(Mathf.Log(i)*scalex, spectrum[i]*scaley, 0), Color.green);
+    }
+}
+```
 
 routing sound
 --
 
-soundflower - TODO
+on mac osx you can use the free program soundflower to send audio directly from one applications to another.
 
-https://github.com/mattingalls/Soundflower/releases get the 2.0b2
+* go to <https://github.com/mattingalls/Soundflower/releases> and get the 2.0b2 version
+* install and restart your computer
+* find Applications / Utilities / Audio Midi Setup and create an aggregated device (+)
+* call it something (here 'builtin+soundflower') and set it up like in this screenshot...
+
+![02soundflower](02soundflower.png?raw=true "soundflower")
+
+* go to System Preferences / Audio / Input and select 'Soundflower (2ch)'
+* go to System Preferences / Audio / Output and select 'builtin+soundflower'
+* start supercollider and run the following code...
+
+```
+s.options.numOutputBusChannels= 4;
+s.reboot
+
+a= {Saw.ar([400, 404, 505, 606], LFSaw.ar([1, 2, 3, 4]))}.play; //output 4channels, 0-1 speakers, 2-3 soundflower
+a.release;
+```
+
+* go to unity
+* select 'Edit / Project Settings / Player'
+* tick 'Run In Background'
+
+![03background](03background.png?raw=true "background")
+
+* run and you should see the sound from supercollider (output channels 2-3)
+
+audio latency
+--
+
+optionally to make the graphics react faster you can decrease the audio latency in unity.
+
+* go to 'Edit / Project Settings / Audio'
+* set 'DSP Buffer Size' to 'Best latency'
+
+![04latency](04latency.png?raw=true "latency")
