@@ -20,7 +20,7 @@ dates
 - [x] [08dec 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161208): more network
 - [x] [15dec 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk161215): advanced network (note: this week in room 214)
 - [x] [05jan 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk170105): present own project idea + vr
-- [ ] 12jan 14-16
+- [ ] [12jan 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk170112): own projects (midi, fft)
 - [ ] 19jan 14-16
 - [ ] 26jan 14-16
 - [ ] 02feb 14-16
