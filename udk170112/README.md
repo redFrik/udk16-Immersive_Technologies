@@ -159,3 +159,72 @@ optionally to make the graphics react faster you can decrease the audio latency 
 * set 'DSP Buffer Size' to 'Best latency'
 
 ![04latency](04latency.png?raw=true "latency")
+
+falling objects
+--
+
+this example automatically creates a number of objects (prefab) and then make them fall down onto a plane. it demonstrates how to instantiate objects, make a prefab and tag objects etc.
+
+see <https://docs.unity3d.com/Manual/InstantiatingPrefabs.html>
+
+* make a new unity 3d project (here we called 'fall')
+* select 'GameObject / 3D Object / Plane'
+* select 'GameObject / 3D Object / Sphere'
+* select 'Component / Physics / Rigidbody'
+* select 'Assets / Create / Material'
+* call it something (here 'sphmat')
+* edit the material in the inspector - set colour, metallic, smoothness etc
+* select the 'Sphere' in the inspector window
+* drag&drop the material onto the materials element 0 in the inspector window
+* your scene should now look like this...
+
+![05falling1](05falling1.png?raw=true "falling1")
+
+* now drag&drop the 'Sphere' from the hierarchy window to your assets (next to 'sphmat')
+* then delete the 'Sphere' from the scene (ctrl+click in the hierarchy window and select delete)
+* your scene should now look like this...
+
+![05falling2](05falling2.png?raw=true "falling2")
+
+* select 'GameObject / Create Empty'
+* in the inspector window click 'Tag / Add Tag...'
+* click the + sign to make a new tag - here we call it 'ball'
+* select the 'GameObject' again in the hierarchy window
+* select 'Add Component / New Script'
+* call it something (here 'falling'), make sure language is **javascript** and click 'Create and Add'
+* double click the script to open it in MonoDevelop
+* paste in the code below replacing what was there and save
+
+```javascript
+#pragma strict
+
+public var prefab : GameObject;
+public var radius= 5;
+public var num= 30;	//how many objects
+public var speed= 2;
+public var height= 4;
+private var cnt= 0;
+
+function Start() {
+    for(var i= 0; i<num; i++) {
+        var angle= i*Mathf.PI*2/num;
+        var pos= Vector3(Mathf.Cos(angle), 1, Mathf.Sin(angle))*radius;
+        var obj= Instantiate(prefab, pos, Quaternion.identity);
+        obj.tag= "ball";
+    }
+}
+function Update() {
+    var objects : GameObject[];
+    objects= GameObject.FindGameObjectsWithTag("ball");
+    if(Time.frameCount%speed==0) {
+        var index= cnt%objects.Length;
+        objects[index].transform.position.y= height;
+        cnt= cnt+1;
+    }
+}
+```
+
+* back in unity drag&drop the 'Sphere' from assets window to 'Prefab' in gameobject inspector
+* press play and you should see balls falling like this...
+
+![05falling2](05falling2.png?raw=true "falling2")
