@@ -163,7 +163,7 @@ optionally to make the graphics react faster you can decrease the audio latency 
 falling objects
 --
 
-this example automatically creates a number of objects (prefab) and then make them fall down onto a plane. it demonstrates how to instantiate objects, make a prefab and tag objects etc.
+this example automatically creates a number of objects (prefab) and then make them fall down onto a plane. it demonstrates how to instantiate objects, make a prefab, tag objects etc.
 
 see <https://docs.unity3d.com/Manual/InstantiatingPrefabs.html>
 
@@ -173,7 +173,7 @@ see <https://docs.unity3d.com/Manual/InstantiatingPrefabs.html>
 * select 'Component / Physics / Rigidbody'
 * select 'Assets / Create / Material'
 * call it something (here 'sphmat')
-* edit the material in the inspector - set colour, metallic, smoothness etc
+* edit the material in the inspector - play with colour, metallic, smoothness etc
 * select the 'Sphere' in the inspector window
 * drag&drop the material onto the materials element 0 in the inspector window
 * your scene should now look like this...
@@ -184,7 +184,7 @@ see <https://docs.unity3d.com/Manual/InstantiatingPrefabs.html>
 * then delete the 'Sphere' from the scene (ctrl+click in the hierarchy window and select delete)
 * your scene should now look like this...
 
-![05falling2](05falling2.png?raw=true "falling2")
+![06falling2](06falling2.png?raw=true "falling2")
 
 * select 'GameObject / Create Empty'
 * in the inspector window click 'Tag / Add Tag...'
@@ -227,4 +227,4 @@ function Update() {
 * back in unity drag&drop the 'Sphere' from assets window to 'Prefab' in gameobject inspector
 * press play and you should see balls falling like this...
 
-![05falling3](05falling3.png?raw=true "falling3")
+![07falling3](07falling3.png?raw=true "7alling3")
