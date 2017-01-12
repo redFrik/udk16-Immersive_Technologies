@@ -227,4 +227,4 @@ function Update() {
 * back in unity drag&drop the 'Sphere' from assets window to 'Prefab' in gameobject inspector
 * press play and you should see balls falling like this...
 
-![05falling2](05falling2.png?raw=true "falling2")
+![05falling3](05falling3.png?raw=true "falling3")
