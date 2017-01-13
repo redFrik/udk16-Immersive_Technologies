@@ -80,6 +80,10 @@ you should see something like this...
 
 ![01mic](01mic.png?raw=true "mic")
 
+NOTE: if you do not see any green lines make sure you have 'Gizmos' activated
+
+the green lines are only a test (Debug.DrawLine) to show how to access the audio sample data.
+
 fft
 --
 
@@ -117,6 +121,9 @@ function Update() {
     }
 }
 ```
+NOTE: if you do not see any green lines make sure you have 'Gizmos' activated
+
+and again note that the green lines are only a test (Debug.DrawLine) to show how to access the spectral data.
 
 routing sound
 --
@@ -227,4 +234,4 @@ function Update() {
 * back in unity drag&drop the 'Sphere' from assets window to 'Prefab' in gameobject inspector
 * press play and you should see balls falling like this...
 
-![07falling3](07falling3.png?raw=true "7alling3")
+![07falling3](07falling3.png?raw=true "falling3")
