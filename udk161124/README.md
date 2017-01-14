@@ -10,7 +10,7 @@ supercollider
 
 playing around with beating sines / binaural beats...
 
-```
+```supercollider
 a= {SinOsc.ar([300, 308], 0, 0.5)}.play;  //alpha
 a.release(2);
 

@@ -10,7 +10,7 @@ NOTE: everyone should be connected to the same network for the following to work
 
 and also make sure your firewall is not blocking incomming udp connections on ports 57110 (scserver) and 57120 (sclang). (on osx you are often asked when starting programs if you want to allow incoming network connections or not - select allow for supercollider and unity).
 
-```
+```supercollider
 OSCFunc.trace(true, true);  //just post what comes in to sc on port 57120
 
 n= NetAddr("127.0.0.1", 57120);  //your own ip address (aka loopback or localhost)
@@ -38,7 +38,7 @@ a.release(2);
 
 set up osc receivers in supercollider
 
-```
+```supercollider
 s.boot;
 
 (
@@ -65,7 +65,7 @@ n.sendMsg(\hej, 1200, 2);
 
 now try to send to neighbour computers...
 
-```
+```supercollider
 n= NetAddr("192.168.1.142", 57120);  //edit to match your neighbour's computer ip
 n.sendMsg(\hallo, 505);
 
@@ -161,7 +161,7 @@ and before running, for the scene not to halt when we use supercollider, do the 
 
 * now hit run, switch over to supercollider and try the following code...
 
-```
+```supercollider
 //supercollider code:
 //use with example script 'receiver'
 n= NetAddr("127.0.0.1", 8400);
@@ -173,7 +173,7 @@ you should see the cube and sphere change when you send these commands. try with
 
 then try the following code which takes sound input from the built-in microphone, does amplitude tracking and then sends over that data to unity.
 
-```
+```supercollider
 //mic amplitude controls sphere height
 (
 n= NetAddr("127.0.0.1", 8400);
@@ -235,7 +235,7 @@ public function AllMessageHandler(oscMessage: OscMessage) {
 
 and with the following supercollider code you should see the cube move up and down depending on pitch.
 
-```
+```supercollider
 //frequency controls cube y-position
 (
 n= NetAddr("127.0.0.1", 8400);

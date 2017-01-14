@@ -10,7 +10,7 @@ first we just load some soundfiles and play them locallly (on our own machines)
 
 remember you can drag&drop files from desktop on to the supercollider code document to get the path names.
 
-```
+```supercollider
 s.boot;
 
 //load some soundfiles into buffers
@@ -41,7 +41,7 @@ n.sendMsg(\sfplay, 2);
 
 now try to play soundfiles remotely (on your neighbour's machine)
 
-```
+```supercollider
 //send to your neighbours
 m= NetAddr("192.168.1.52", 57120);  //edit ip to match some neighbour
 m.sendMsg(\sfplay, 3.rand);
@@ -122,7 +122,7 @@ function OnDisable() {
 
 now open supercollider and run the following code
 
-```
+```supercollider
 //supercollider code:
 OSCFunc.trace(true, true);  //turn on debugging
 ```
@@ -130,7 +130,7 @@ OSCFunc.trace(true, true);  //turn on debugging
 go back to unity, click play and then run around with the arrow keys (space to jump, shift to run)
 if everything works you should see data being printed in supercollider's post window.
 
-```
+```supercollider
 OSC Message Received:
     time: 5783.893580814
     address: a NetAddr(127.0.0.1, 60512)
@@ -152,7 +152,7 @@ OSC Message Received:
 
 to make sound run the following code in supercollider...
 
-```
+```supercollider
 //use with example script 'sender'
 (
 var syn= {|freq1= 100, freq2= 100, mul= 0|
@@ -173,7 +173,7 @@ now run far out on the terrain to turn up the frequencies in left and right chan
 
 then go back to supercollider and run the following code. it requires a soundfile (aiff or wav) and by moving around in the terrain you also control trigger rate and offset position of the soundfile granulator (TGrains).
 
-```
+```supercollider
 b.free; b= Buffer.readChannel(s, "/Users/asdf/Desktop/ND_BeatMixA125-01.wav", channels: [0]);
 
 (

@@ -71,7 +71,7 @@ save and go back to unity. it shoud look like this...
 
 click play and then switch over to supercollider and run the following code. it will track the amplitude from the microphone and send a value (1-10) over to unity depending on how loud the sound is.
 
-```
+```supercollider
 s.boot;
 
 (
@@ -183,13 +183,13 @@ function OnDisable() {
 
 now click play and go to supercollider. see incoming data with...
 
-```
+```supercollider
 OSCFunc.trace(true, true);
 ```
 
 then try this sounding example...
 
-```
+```supercollider
 (
 SynthDef(\coll, {|freq= 400, amp= 0.5, atk= 0.001, rel= 0.01, pan= 0|
     var env= EnvGen.ar(Env.perc(atk, rel, amp), doneAction:2);

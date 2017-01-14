@@ -160,7 +160,7 @@ function OnDisable() {
 
 and last a supercollider example that uses a single hand controller's position and rotation to scan through sound fragments in a soundfile.
 
-```
+```supercollider
 (
 //scanning through a soundfile using a single controller (left)
 s.latency= 0.05;

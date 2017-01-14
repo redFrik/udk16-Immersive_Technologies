@@ -12,7 +12,7 @@ supercollider
 
 playing around with rhythms...
 
-```
+```supercollider
 s.options.numOutputBusChannels= 16; //make sure supercollider uses 16 outputs
 s.reboot;   //start (or restart) the sound server
 s.meter;    //open level meter window
@@ -30,7 +30,7 @@ study the pattern.
 as we normally only have stereo sound output (2 channels - left and right) from our laptops, we can only hear the first two clicks.
 in supercollider we can mix all the clicking sounds down to stereo (here panning the 10 sounds left to right) by wrapping the `Impulse` in a `Splay` like this...
 
-```
+```supercollider
 a= {Splay.ar(Impulse.ar([1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9]))}.play;
 a.release;
 ```
@@ -39,7 +39,7 @@ now you should hear all ten clicks. note how they go in and out of sync.
 
 in programming you often want to write code in a more compact form. so we can get exactly the same result by writing like this...
 
-```
+```supercollider
 a= {Splay.ar(Impulse.ar((1.0, 1.1 .. 1.9)))}.play;
 a.release;
 
@@ -53,7 +53,7 @@ play around with the numbers and try to build some different arrays.
 
 here are some more examples...
 
-```
+```supercollider
 (1, 2 .. 99);  //an array of whole numbers 1-99
 
 (1, -2 .. 99);  //this causes and error because with -2 you will never reach 99
@@ -66,14 +66,14 @@ note that there's a drawback with this because it's not so easy to spontaneously
 
 now try putting in some of your own arrays into the sound synthesis code. for example...
 
-```
+```supercollider
 a= {Splay.ar(Impulse.ar((0.1, 0.667 .. 3)))}.play;
 a.release;
 ```
 
 to better differentiate between the click sounds we can instead make them triggers short pitched 'ping' sounds.
 
-```
+```supercollider
 a= {var arr= (1.0, 1.1 ..1.9); Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
 a.release;
 ```
@@ -82,7 +82,7 @@ again try to add your own arrays.
 
 note the different rhythms your get. numbers like 1, 0.5, 0.3333333, 0.25 will make the click sounds come back in sync at regular intervals. so 1/2, 1/3, 1/4 etc are all giving interesting result, while combinations of more random numbers like 0.41, 1.18 etc will repeat perhaps only once every 10 years.
 
-```
+```supercollider
 a= {var arr= (1/8, (1/8)+(1/16) .. 1.0); Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
 a.release;
 
@@ -93,7 +93,7 @@ a.release;
 
 here is last week's example again but using this technique for triggering the sound grains.
 
-```
+```supercollider
 b.free; b= Buffer.readChannel(s, "/Users/asdf/Desktop/sounds/a11wlk01-44_1.aiff", channels:[0]);  //here edit path to your soundfile
 
 a= {var arr= (1/16, (1/16)+(1/8) .. 1); Splay.ar(TGrains.ar(2, Impulse.ar(arr), b.bufnum, 1, arr*b.duration*0.75, 0.5))}.play;
@@ -106,7 +106,7 @@ a.release;
 
 two more examples using this technique but with frequencies mapped to scales...
 
-```
+```supercollider
 a= {var arr= (1, 2 .. 16); Splay.ar(Ringz.ar(Impulse.ar(arr/16).lag(0.005), (64+Scale.major.degrees).midicps, 0.8))*0.5}.play;
 a.release;
 
@@ -116,7 +116,7 @@ a.release;
 
 some more examples...
 
-```
+```supercollider
 //79 pings
 a= {var arr= (0.1, 0.15 .. 4)/8; Splay.ar(Ringz.ar(Impulse.ar(arr), 800*arr, 0.2))}.play;
 a.release;

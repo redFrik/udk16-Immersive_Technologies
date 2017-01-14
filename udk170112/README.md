@@ -141,7 +141,7 @@ on mac osx you can use the free program soundflower to send audio directly from 
 * go to System Preferences / Audio / Output and select 'builtin+soundflower'
 * start supercollider and run the following code...
 
-```
+```supercollider
 s.options.numOutputBusChannels= 4;
 s.reboot
 

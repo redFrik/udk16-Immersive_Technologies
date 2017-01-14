@@ -4,7 +4,7 @@ basic supercollider, basic unity
 supercollider
 --
 
-```
+```supercollider
 s.boot
 
 //--recording

@@ -4,7 +4,7 @@ more supercollider, more unity
 supercollider
 --
 
-```
+```supercollider
 s.boot
 
 //--loading a soundfile

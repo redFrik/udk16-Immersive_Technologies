@@ -45,7 +45,7 @@ supercollider
 * making sound and getting around
 * recreating Boomerang by Richard Serra <https://www.youtube.com/watch?v=8z32JTnRrHc>
 
-```
+```supercollider
 //to use with headphones and built-in microphone
 s.boot;
 
