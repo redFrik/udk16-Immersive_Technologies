@@ -77,7 +77,6 @@ movies
 * double click the script to open it in MonoDevelop
 * paste in the code below replacing what was there and save
 
-
 ```javascript
 #pragma strict
 
@@ -117,6 +116,8 @@ test it by pressing play. you should see many planes in a double spiral.
 
 NOTE: you will need to edit the code to match the filenames you use.
 
+now add a character that can move around and come close to the movies
+
 * select 'Assets / Import Package / Characters'
 * click 'import' in the window that pops up to import everything
 * go to 'Project' tab and then expand Assets
@@ -128,3 +129,59 @@ NOTE: you will need to edit the code to match the filenames you use.
 * press play and you should see something like this (and move around with the arrow keys)...
 
 ![02spiral](02spiral.png?raw=true "spiral")
+
+sonogram
+--
+
+NOTE: make sure you have the microphone selected as audio input device and use headphones to avoid feedback.
+
+* create a new 3d project
+* select 'GameObject / 3D Object / Plane'
+* position the 'Main Camera' at x:0 y:9 z:0 with rotation x:90 y:0 z:0
+* select 'GameObject / Audio / Audio Source'
+* select 'Add Component / New Script'
+* call it something (here 'sono'), make sure language is **javascript** and click 'Create and Add'
+* double click the script to open it in MonoDevelop
+* paste in the code below replacing what was there and save
+
+```javascript
+#pragma strict
+
+private var spectrum : float[];
+private var snd : AudioSource;
+private var buffersize= 512;    //fft buffer size in samples (must be power-of-two)
+public var resolution= 100;		//0-255
+public var amp= 4.0;
+public var plane : GameObject;
+public var texture: Texture2D;
+
+function Start() {
+    snd= GetComponent.<AudioSource>();
+    snd.clip= Microphone.Start(null, true, 1, 44100);
+    snd.loop= true;
+    while(!(Microphone.GetPosition(null)>0)) {}
+    snd.Play();   //must be playing for GetSpectrumData to work
+    spectrum= new float[buffersize];
+    plane= GameObject.Find("Plane");
+    texture= new Texture2D(256, buffersize);	//max resolution
+    plane.GetComponent.<Renderer>().material.mainTexture= texture;
+}
+function Update() {
+    snd.GetSpectrumData(spectrum, 0, FFTWindow.Hanning);
+    var columns= Mathf.Clamp(resolution, 1, texture.width);
+    var columnWidth= texture.width/columns;
+    var offset= columnWidth*(Time.frameCount%columns);
+    for(var y= 0; y<buffersize; y++) {
+        var val= spectrum[y]*amp;
+        var color: Color= Color(0, val, 0);
+        for(var x= 0; x<columnWidth; x++) {
+            texture.SetPixel(offset+x, y, color);
+        }
+    }
+    texture.Apply();
+}
+```
+
+now when you run this scene should see a sonogram forming - tap on the microphone. play around with the amp and resolution variables in AudioSource.
+
+![03sonogram](03sonogram.png?raw=true "sonogram")
