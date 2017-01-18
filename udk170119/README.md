@@ -47,3 +47,18 @@ to convert the png files to a mp4 movie there are many alternatives. one is to u
 ```bash
 ffmpeg -framerate 30 -i img%04d.png -s:v 1280x720 -c:v libx264 -profile:v high -crf 25 -pix_fmt yuv420p output.mp4
 ```
+
+animation
+--
+
+* select 'Main Camera' in the Hierarchy window
+* select 'Window / Animation' to open the animation window
+* click the 'Create' button and enter a name for your animation
+* click the 'Add Propery' button and select 'Transform / Position'
+* select the 'Curves' tab near the bottom of the window and start drawing some curves
+* ctrl+click to add new keys, space key to play
+* in the 'Samples' numberbox you can control the speed
+
+![01animation](01animation.png?raw=true "animation")
+
+note that any object and parameter can be animated - not only the main camera
