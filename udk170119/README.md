@@ -65,11 +65,47 @@ animation
 
 note that any object and parameter can be animated - not only the main camera
 
+movie
+--
+
+simple example with one plane acting as a video wall.
+
+* create a new 3d project
+* create a folder (left or control click in the assets window) and name it 'Resources'
+* drag&drop a movie file into it (here transit.mov)
+* select 'GameObject / 3D Object / Plane'
+* select 'Add Component / New Script'
+* call it something (here 'movie'), make sure language is **javascript** and click 'Create and Add'
+* double click the script to open it in MonoDevelop
+* paste in the code below replacing what was there and save
+
+```javascript
+#pragma strict
+
+public var texture : MovieTexture;
+
+function Start() {
+    texture= Resources.Load("transit"); //edit to match your filename
+    this.GetComponent.<Renderer>().material.mainTexture= texture;
+    texture.loop= true;
+    texture.Play();
+}
+
+function Update() {
+}
+```
+
+press play in unity and you should see something like this...
+
+![02movie](02movie.png?raw=true "movie")
+
 movies
 --
 
+this example generates a lot of (100) plane objects and map videos as textures.
+
 * create a new 3d project
-* create a folder (left or control click in the assets window) and name it Resources
+* create a folder (left or control click in the assets window) and name it 'Resources'
 * drag&drop a few movie files into it (here station.mov, street.mov, transit.mov)
 * select 'GameObject / Create Empty'
 * select 'Add Component / New Script'
@@ -128,7 +164,7 @@ now add a character that can move around and come close to the movies
 * select 'Edit / Project Settings / Physics' and set Y gravity to 0 (the default is -9.81)
 * press play and you should see something like this (and move around with the arrow keys)...
 
-![02spiral](02spiral.png?raw=true "spiral")
+![03spiral](03spiral.png?raw=true "spiral")
 
 sonogram
 --
@@ -184,4 +220,4 @@ function Update() {
 
 now when you run this scene should see a sonogram forming - tap on the microphone. play around with the amp and resolution variables in AudioSource.
 
-![03sonogram](03sonogram.png?raw=true "sonogram")
+![04sonogram](04sonogram.png?raw=true "sonogram")
