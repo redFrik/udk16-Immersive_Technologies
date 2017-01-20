@@ -68,11 +68,11 @@ note that any object and parameter can be animated - not only the main camera
 movie
 --
 
-simple example with one plane acting as a video wall.
+simple example with one plane acting as a video screen...
 
 * create a new 3d project
 * create a folder (left or control click in the assets window) and name it 'Resources'
-* drag&drop a movie file into it (here transit.mov)
+* drag&drop a movie file into it (here transit.mov). NOTE edit the code below to match this name
 * select 'GameObject / 3D Object / Plane'
 * select 'Add Component / New Script'
 * call it something (here 'movie'), make sure language is **javascript** and click 'Create and Add'

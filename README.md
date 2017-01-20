@@ -22,7 +22,7 @@ dates
 - [x] [05jan 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk170105): present own project idea + vr
 - [x] [12jan 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk170112): own projects (midi, mic, fft)
 - [x] [19jan 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk170119): own projects (record, movies, animation, sonogram)
-- [ ] 26jan 14-16
+- [ ] [26jan 14-16](https://github.com/redFrik/udk16-Immersive_Technologies/tree/master/udk170126): own projects (grid)
 - [ ] 02feb 14-16
 - [ ] 09feb 14-16
 
