@@ -14,7 +14,7 @@ NOTE: you can also access the webcamera directly in unity - this example is for 
 * get the .zip file and uncompress it
 * find the folder Plugins in the zip you just uncompressed (unity-osc-receiver-master / Assets)
 * drag&drop it into unity's assets window (bottom)
-* select GameObject / Create Empty
+* select 'GameObject / Create Empty'
 * in the inspector select 'Add Component / Scripts / Osc'
 * and again select 'Add Component / Scripts / UDP Packet IO'
 * select 'Add Component / New Script'
@@ -78,3 +78,52 @@ you should see a grid of spheres. then download and start the max patch 'grid.ma
 ![01grid](01grid.png?raw=true "grid")
 
 NOTE: while writing this example i discovered that heaversm's osc plugins can not deal with messages longer than 198 values. if such a message arrives the plugin crashes and no more osc messages can be received until you leave play mode and press play again. so in this example we split up each video frame into rows and send 48 messages with 64 (actually 65) floats to get around this limitation.
+
+mic trigger
+--
+
+the following example uses the microphone as a trigger.
+
+* create a new project in unity
+* select 'GameObject / 3D Object / Cube'
+* select 'GameObject / Audio / Audio Source'
+* select 'Add Component / New Script'
+* call it something, make sure language is **javascript** and click 'Create and Add'
+* double click the script to open it in MonoDevelop
+* paste in the code below replacing what was there and run
+
+```javascript
+#pragma strict
+
+public var thresh= 0.3;
+private var samples : float[];
+private var snd : AudioSource;
+public var cube : GameObject;
+
+function Start() {
+    snd= GetComponent.<AudioSource>();
+    snd.clip= Microphone.Start(null, true, 1, 44100);
+    snd.loop= true;
+    while(!(Microphone.GetPosition(null)>0)) {}
+    //snd.Play();   //monitor
+    samples= new float[snd.clip.samples*snd.clip.channels];
+    cube= GameObject.Find("Cube");
+}
+function Update() {
+    var trigged= false;
+    snd.clip.GetData(samples, 0);
+    for(var i= 0; i<samples.Length; i++) {
+        if(samples[i]>=thresh) {
+            trigged= true;
+            break;
+        }
+    }
+    //--check the trigger and do something - here just move a cube
+    if(trigged) {
+        cube.transform.localPosition.y= 2;
+    } else {
+        cube.transform.localPosition.y= 0;
+    }
+}
+```
+now tap on the microphone and you should see the cube jump up if the amplitude is above the threshold (0.3 by default).
