@@ -4,7 +4,21 @@ projects
 grid
 --
 
-TODO - not finished
+taking webcamera input from MaxMspJitter and sending a 64x48 grascale matrix at 30fps over osc to unity.
+
+* create a new 3d project in unity
+* go to Edit / Project Settings / Player and tick 'Run In Background'
+* go to https://github.com/heaversm/unity-osc-receiver and click the green download button
+* get the .zip file and uncompress it
+* find the folder Plugins in the zip you just uncompressed (unity-osc-receiver-master / Assets)
+* drag&drop it into unity's assets window (bottom)
+* select GameObject / Create Empty
+* in the inspector select 'Add Component / Scripts / Osc'
+* and again select 'Add Component / Scripts / UDP Packet IO'
+* select 'Add Component / New Script'
+* call it something (here 'receiver'), make sure language is **javascript** and click 'Create and Add'
+* double click the script to open it in MonoDevelop
+* paste in the code below replacing what was there and run
 
 ```javascript
 #pragma strict
@@ -56,3 +70,7 @@ public function AllMessageHandler(oscMessage: OscMessage) {
     }
 }
 ```
+
+you should see a grid of spheres. then download and start the max patch 'grid.maxpat' that is available in the same git repository folder as this readme (scroll to the top of the page). run it and you should see something like in the screenshot below (which is showung my face and hand)...
+
+![01grid](01grid.png?raw=true "grid")
