@@ -127,3 +127,44 @@ function Update() {
 }
 ```
 now tap on the microphone and you should see the cube jump up if the amplitude is above the threshold (0.3 by default).
+
+camera
+--
+
+this example sets up a script that make the main camera follow and spin around the head of a character.
+
+* create a new 3d project in unity
+* select 'GameObject / 3D Object / Terrain'
+* select 'Assets / Import Package / Characters'
+* click 'import' in the window that pops up to import everything
+* go to 'Project' tab and then expand Assets
+* find 'Standard Assets / Characters / ThirdPersonCharacter / Prefabs / ThirdPersonController'
+* drag&drop ThirdPersonController into the Hierarchy window
+* set the position to x:1, y:0, z:1 so that the character is starting over the terrain
+* select 'Add Component / New Script'
+* call it something, make sure language is **javascript** and click 'Create and Add'
+* double click the script to open it in MonoDevelop
+* paste in the code below replacing what was there and run
+
+```javascript
+#pragma strict
+
+public var cameras : GameObject[];
+public var radius= 1;
+public var height= 2;
+public var speed= 0.02;
+
+function Start() {
+    cameras= GameObject.FindGameObjectsWithTag("MainCamera");
+}
+function Update() {
+    var x= Mathf.Sin(Time.frameCount*speed)*radius;
+    var z= Mathf.Cos(Time.frameCount*speed)*radius;
+    cameras[0].transform.localPosition= this.transform.position+Vector3(x, height, z);
+    cameras[0].transform.LookAt(this.transform);
+}
+```
+
+now try changing radius, height and speed (can also go negative) while the scene is running.
+
+NOTE: the arrow keys will not work correctly. they should be independent of camera rotation but are not.
