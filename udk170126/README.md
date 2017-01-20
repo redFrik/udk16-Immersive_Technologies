@@ -4,7 +4,9 @@ projects
 grid
 --
 
-taking webcamera input from MaxMspJitter and sending a 64x48 grascale matrix at 30fps over osc to unity.
+using MaxMspJitter to take video input from webcamera, downsample it to 64x48 grascale and sending over osc to unity at 30fps.
+
+NOTE: you can also access the webcamera directly in unity - this example is for a specific project and not the best solution in general.
 
 * create a new 3d project in unity
 * go to Edit / Project Settings / Player and tick 'Run In Background'
@@ -71,6 +73,8 @@ public function AllMessageHandler(oscMessage: OscMessage) {
 }
 ```
 
-you should see a grid of spheres. then download and start the max patch 'grid.maxpat' that is available in the same git repository folder as this readme (scroll to the top of the page). run it and you should see something like in the screenshot below (which is showung my face and hand)...
+you should see a grid of spheres. then download and start the max patch 'grid.maxpat' that is available in the same git repository folder as this readme (scroll to the top of this page). run it and you should see something like in the screenshot below (which is showing my face and hand)...
 
 ![01grid](01grid.png?raw=true "grid")
+
+NOTE: while writing this example i discovered that heaversm's osc plugins can not deal with messages longer than 198 values. if such a message arrives the plugin crashes and no more osc messages can be received until you leave play mode and press play again. so in this example we split up each video frame into rows and send 48 messages with 64 (actually 65) floats to get around this limitation.
