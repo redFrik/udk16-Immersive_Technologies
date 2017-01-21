@@ -168,3 +168,69 @@ function Update() {
 now try changing radius, height and speed (can also go negative) while the scene is running.
 
 NOTE: the arrow keys will not work correctly. they should be independent of camera rotation but are not.
+
+fft terrain
+--
+
+in this example we take the spectrum of the microphone input and turn it into a realtime terrain heightmap.
+
+* create a new 3d project in unity
+* select 'GameObject / 3D Object / Terrain'
+* select 'Assets / Import Package / Characters'
+* click 'import' in the window that pops up to import everything
+* go to 'Project' tab and then expand Assets
+* find 'Standard Assets / Characters / FirstPersonCharacter / Prefabs / FPSController'
+* drag&drop FPSController into the Hierarchy window
+* set the position to x:1, y:0, z:1 so that the character is starting over the terrain
+* mute the Audio Listener in for Main Camera in the inspector window
+* select 'GameObject / Audio / Audio Source'
+* select 'Add Component / New Script'
+* call it something (here fft), make sure language is **javascript** and click 'Create and Add'
+* double click the script to open it in MonoDevelop
+* paste in the code below replacing what was there and run
+
+```javascript
+#pragma strict
+
+private var spectrum : float[];
+private var snd : AudioSource;
+private var buffersize= 256;    //fft buffer size in samples (must be power-of-two)
+public var amp= 0.1;
+public var speed= 0.2;
+private var terrain : Terrain;
+private var heightData : TerrainData;
+private var width : int;
+private var height : int;
+private var heights : float[,];
+
+function Start() {
+    snd= GetComponent.<AudioSource>();
+    snd.clip= Microphone.Start(null, true, 1, 44100);
+    snd.loop= true;
+    while(!(Microphone.GetPosition(null)>0)) {}
+    snd.Play();   //must be playing for GetSpectrumData to work
+    spectrum= new float[buffersize];
+    terrain= GameObject.Find("Terrain").transform.GetComponent(Terrain);
+    heightData= terrain.terrainData;
+    heightData.heightmapResolution= buffersize+1;
+    width= heightData.heightmapWidth;
+    height= heightData.heightmapHeight;
+    heights= heightData.GetHeights(0, 0, width, 1);
+}
+function Update() {
+    var y : int = (Time.frameCount*speed)%width;
+    snd.GetSpectrumData(spectrum, 0, FFTWindow.Hanning);
+    for(var x= 0; x<buffersize; x++) {
+        var val= spectrum[x]*amp;
+        heights[0, x]= val;
+    }
+    heightData.SetHeights(0, y, heights);
+}
+```
+
+![02fft](02fft.png?raw=true "fft")
+
+references
+--
+
+<https://unity3d.com/learn/tutorials/topics/graphics/terrain-introduction-heightmaps>
