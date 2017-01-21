@@ -4,7 +4,7 @@ projects
 grid
 --
 
-using MaxMspJitter to take video input from webcamera, downsample it to 64x48 grascale and sending over osc to unity at 30fps.
+using MaxMspJitter or Processing to take video input from webcamera, downsample it to 64x48 grascale and sending over osc to unity at 30fps.
 
 NOTE: you can also access the webcamera directly in unity - this example is for a specific project and not the best solution in general.
 
@@ -73,7 +73,7 @@ public function AllMessageHandler(oscMessage: OscMessage) {
 }
 ```
 
-you should see a grid of spheres. then download and start the max patch 'grid.maxpat' that is available in the same git repository folder as this readme (scroll to the top of this page). run it and you should see something like in the screenshot below (which is showing my face and hand)...
+you should see a grid of spheres. then download and start the max patch 'grid.maxpat' or the processing sketch 'grid.pde' that are available in the same git repository folder as this readme (scroll to the top of this page). run it and you should see something like in the screenshot below (which is showing my face and hand)...
 
 ![01grid](01grid.png?raw=true "grid")
 
@@ -227,6 +227,8 @@ function Update() {
     heightData.SetHeights(0, y, heights);
 }
 ```
+
+tap the microphone and run around. you should see the spectrum of the sound as dynamically updated mountains. if your computer can handle it try to increase the resolution (buffersize) to 512 or even 1024 to see more details.
 
 ![02fft](02fft.png?raw=true "fft")
 
