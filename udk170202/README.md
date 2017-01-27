@@ -35,7 +35,7 @@ now a custom example...
 * paste in the code below replacing what was there and save
 * connect the kinect device and run the unity scene
 
-```cs
+```csharp
 using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;

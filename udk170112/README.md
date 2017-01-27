@@ -17,7 +17,7 @@ for unity to take midi input from another program or from a hardware midicontrol
 * paste in the code below replacing what was there and save
 * connect midi device and run the unity scene
 
-```cs
+```csharp
 using UnityEngine;
 using MidiJack;
 
