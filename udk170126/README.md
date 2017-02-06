@@ -223,6 +223,7 @@ function Update() {
     for(var x= 0; x<buffersize; x++) {
         var val= spectrum[x]*amp;
         heights[0, x]= val;
+        //heights[0, Mathf.Log(x+1, buffersize)*buffersize]= val;  //linear mapping
     }
     heightData.SetHeights(0, y, heights);
 }
