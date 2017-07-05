@@ -99,6 +99,25 @@ press play in unity and you should see something like this...
 
 ![02movie](02movie.png?raw=true "movie")
 
+***NOTE*** UPDATE JUL2017 the new way to do this (unity 5.6) is to use VideoPlayer instead of MovieTexture.
+
+* create a new 3d project
+* select 'GameObject / 3D Object / Plane'
+* select 'Add Component / New Script'
+* call it something (here 'movie'), make sure language is **javascript** and click 'Create and Add'
+* double click the script to open it in MonoDevelop
+* paste in the code below replacing what was there and save
+
+```javascript
+#pragma strict
+
+function Start() {
+    var player= gameObject.AddComponent.<UnityEngine.Video.VideoPlayer>();
+    player.url= "/Users/asdf/Desktop/bbb.mp4";  //edit path to your movie file
+    player.isLooping= true;
+}
+```
+
 movies
 --
 
@@ -165,6 +184,41 @@ now add a character that can move around and come close to the movies
 * press play and you should see something like this (and move around with the arrow keys)...
 
 ![03spiral](03spiral.png?raw=true "spiral")
+
+***NOTE*** UPDATE JUL2017 the new way to do this (unity 5.6) is to use VideoPlayer instead of MovieTexture.
+
+warning - very inefficient code...
+
+```javascript
+#pragma strict
+
+public var freq= 0.3;
+public var depthFactor= 0.6;
+public var amp= 5;	//spiral radius
+public var size= 0.1;
+
+function Start() {
+    var num= 100;	//how many plane objects
+    var paths= [	//movie files to load...
+        "/Users/asdf/Desktop/yetanotherdemo.mov",
+        "/Users/asdf/Desktop/street.mov",
+        "/Users/asdf/Desktop/transit.mov"
+    ];
+    for(var j= 0; j<2; j++) {
+        for(var i= 0; i<num; i++) {	//double spiral
+            var plane= GameObject.CreatePrimitive(PrimitiveType.Plane);
+            plane.transform.localScale= Vector3(size, size, 0-size);
+            var offset= j*Mathf.PI;
+            plane.transform.localPosition= Vector3(Mathf.Sin(i*freq+offset)*amp, Mathf.Cos(i*freq+offset)*amp, i*depthFactor);
+            plane.transform.localRotation.x= -1;	//flip planes 90degrees facing the camera
+            var player= plane.AddComponent.<UnityEngine.Video.VideoPlayer>();
+            player.url= paths[(j+i)%paths.length];
+            player.isLooping= true;
+        }
+    }
+    this.transform.localPosition= Vector3(0, 0, 0);
+}
+```
 
 sonogram
 --
