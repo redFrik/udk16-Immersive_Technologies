@@ -1,7 +1,7 @@
 phasing
 --------------------
 
-binaural beats - <https://en.wikipedia.org/wiki/Binaural_beats>
+binaural beats - <https://en.wikipedia.org/wiki/Beat_(acoustics)#Binaural_beats>
 
 online generator - <http://fractalpanda.com/binaural-beats-generator/>
 

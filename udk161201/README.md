@@ -26,7 +26,9 @@ n.sendMsg(\test, 2, 3, 4);  //also send to yourself but using the public ip
 n= NetAddr("192.168.1.142", 57120);  //set this ip to your neighbour's ip
 n.sendMsg(\test, 3, 4, 5);  //send to your neighbour
 
-s.boot;
+s.options.maxLogins= 10
+s.options.bindAddress= "0.0.0.0"
+s.boot
 
 ~lars= Server("lars", NetAddr("192.168.1.142", 57110));  //the sound server on your neighbours computer
 //~lars.boot  //not allowed to boot from remote - so ask your neighbour to run s.boot if (s)he hasn't already
@@ -39,7 +41,9 @@ a.release(2);
 set up osc receivers in supercollider
 
 ```supercollider
-s.boot;
+s.options.maxLogins= 10;
+s.options.bindAddress= "0.0.0.0";
+s.reboot;
 
 (
 OSCdef(\something, {|msg|

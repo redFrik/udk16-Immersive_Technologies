@@ -3,9 +3,9 @@ whitney
 
 john whitney - digital harmony, on the complementarity of music and visual art (1980)
 
-jim bumgardner - [whitney music box](http://krazydad.com/blog/2006/04/23/visual-harmony/)
+jim bumgardner - [whitney music box](https://blog.krazydad.com/2006/04/23/visual-harmony/)
 
-memo atkin - [simple harmonic motion](http://www.memo.tv/simple-harmonic-motion/)
+memo atkin - [simple harmonic motion](https://www.memo.tv/works/simple-harmonic-motion/)
 
 supercollider
 --

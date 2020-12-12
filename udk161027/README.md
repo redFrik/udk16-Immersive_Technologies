@@ -1,7 +1,7 @@
 introduction and overview
 --------------------
 
-* links to previous semesters... <http://redfrik.github.io/udk00-Audiovisual_Programming/>
+* links to previous semesters... <https://redfrik.github.io/udk00-Audiovisual_Programming/>
 * and dates + times for this course... <https://github.com/redFrik/udk16-Immersive_Technologies> <-save this page
 
 discussion
@@ -35,8 +35,8 @@ Darsha Hewitt <http://www.darsha.org> installation at stattbad wedding
 course software
 --
 
-* [SuperCollider](http://supercollider.github.io/download.html)
-* [Unity3D](http://unity3d.com)
+* [SuperCollider](https://supercollider.github.io/download.html)
+* [Unity3D](https://unity3d.com)
 
 supercollider
 --
